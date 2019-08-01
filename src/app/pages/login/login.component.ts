@@ -27,8 +27,8 @@ export class LoginComponent {
 
     public onSubmit(values: Object): void {
         if (this.form.valid) {
-
-            this.authService.login({email: 'haythamov@gmail.com', password: '12345678'});
+console.log(this.form);
+            this.authService.login(this.form.value);
             //this.router.navigate(['/']);
         }
     }
