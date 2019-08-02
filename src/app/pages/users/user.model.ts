@@ -1,11 +1,12 @@
 export class User {
-  id: number;
-  username: string;
-  firstname: string;
-  lastname: string;  
-  email:string;
-
+    id: number;
+    username: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
 }
+
 /*
 
 export class User {
@@ -19,35 +20,35 @@ export class User {
   settings: UserSettings;
 } */
 
-export class UserProfile {  
-  name: string;
-  surname: string;  
-  birthday: Object;
-  gender: string;
-  image: string;
+export class UserProfile {
+    name: string;
+    surname: string;
+    birthday: Object;
+    gender: string;
+    image: string;
 }
 
 export class UserWork {
-  company: string;
-  position: string;
-  salary: number;
+    company: string;
+    position: string;
+    salary: number;
 }
 
-export class UserContacts{
-  email: string;
-  phone: string;
-  address: string;  
+export class UserContacts {
+    email: string;
+    phone: string;
+    address: string;
 }
 
 export class UserSocial {
-  facebook: string;
-  twitter: string;
-  google: string;
+    facebook: string;
+    twitter: string;
+    google: string;
 }
 
-export class UserSettings{
-  isActive: boolean;
-  isDeleted: boolean;
-  registrationDate: Date;
-  joinedDate: Date;
+export class UserSettings {
+    isActive: boolean;
+    isDeleted: boolean;
+    registrationDate: Date;
+    joinedDate: Date;
 }

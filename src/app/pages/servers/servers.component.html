@@ -1,47 +1,47 @@
-<app-content-header 
-    [icon]="'check_box_outline_blank'" 
-    [title]="'Page title'" 
+<app-content-header
+    [icon]="'check_box_outline_blank'"
+    [title]="'Page title'"
     [desc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin ante lectus, id pretium mi dignissim non.'"
     [hideBreadcrumb]="false"
-    [hasBgImage]="true" 
+    [hasBgImage]="true"
     [class]="'pb-4'"></app-content-header>
 
 <div fxLayout="column" class="p-2">
-    <div class="p-2"> 
-    	  <div fxLayout="column" class="mat-elevation-z8">           
+    <div class="p-2">
+    	  <div fxLayout="column" class="mat-elevation-z8">
             <mat-form-field class="px-3 py-1">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
-            </mat-form-field> 
+            </mat-form-field>
         </div>
-        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">       
+        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef> name</mat-header-cell>
                 <mat-cell *matCellDef="let server"> {{server.name}} </mat-cell>
-            </ng-container>         
+            </ng-container>
             <ng-container matColumnDef="url">
                 <mat-header-cell *matHeaderCellDef> url </mat-header-cell>
                 <mat-cell *matCellDef="let server"> {{server.url}} </mat-cell>
-            </ng-container>     
+            </ng-container>
             <ng-container matColumnDef="company">
                 <mat-header-cell *matHeaderCellDef> company </mat-header-cell>
                 <mat-cell *matCellDef="let server"> {{server.company}} </mat-cell>
-            </ng-container>        
+            </ng-container>
             <ng-container matColumnDef="ip">
                 <mat-header-cell *matHeaderCellDef> ip </mat-header-cell>
                 <mat-cell *matCellDef="let server"> {{server.ip}} </mat-cell>
             </ng-container>
                     <ng-container matColumnDef="actions">
   <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
-  <mat-cell *matCellDef="let row" >
+  <mat-cell *matCellDef="let server" >
         <button mat-raised-button color="primary" class="m-1">show</button>
-                <button mat-raised-button color="accent" class="m-1">edit</button>
-                <button mat-raised-button color="warn" class="m-1">delete</button>
+                <button (click)="openServerDialog(server)" mat-raised-button color="accent" class="m-1">edit</button>
+                <button (click)="deleteServer(server)" mat-raised-button color="warn" class="m-1">delete</button>
   </mat-cell>
 </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
-        <button mat-fab color="primary" class="m-1">  <mat-icon>add</mat-icon></button>
+        <button  (click)="openServerDialog(null)"  mat-fab color="primary" class="m-1">  <mat-icon>add</mat-icon></button>
     </div>
 </div>

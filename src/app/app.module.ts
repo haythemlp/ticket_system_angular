@@ -40,6 +40,8 @@ import {MessagesComponent} from './theme/components/messages/messages.component'
 import {UserMenuComponent} from './theme/components/user-menu/user-menu.component';
 import {FavoritesComponent} from './theme/components/favorites/favorites.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ServersDialogComponent } from './pages/servers/servers-dialog/servers-dialog.component';
+import {UserDialogComponent} from "./pages/users/user-dialog/user-dialog.component";
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import {HttpClientModule} from '@angular/common/http';
         MessagesComponent,
         UserMenuComponent,
         FavoritesComponent,
-        ServersComponent
+        ServersComponent,
+        ServersDialogComponent
     ],
     providers: [
         AppSettings,
@@ -84,6 +87,8 @@ import {HttpClientModule} from '@angular/common/http';
     ],
     bootstrap: [
         AppComponent
+    ], entryComponents: [
+        ServersDialogComponent
     ]
 })
 export class AppModule {

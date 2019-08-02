@@ -15,7 +15,7 @@ export class AuthService {
 
 
     login(form): void {
-        this.http.post(apiUrl + 'login', form).subscribe((data) => {
+        this.http.post<any>(apiUrl + 'login', form).subscribe((data) => {
                  console.log(data);
                 localStorage.setItem('user', JSON.stringify(data.data.user));
                  localStorage.setItem('token', data.data.token);

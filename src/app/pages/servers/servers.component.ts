@@ -1,49 +1,80 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServersService} from './servers.service';
-import { Server } from './server';
-import { MatTableDataSource } from '@angular/material';
+import {Server} from './server';
+import {MatDialog, MatTableDataSource} from '@angular/material';
+import {ServersDialogComponent} from "./servers-dialog/servers-dialog.component";
 
 @Component({
-  selector: 'app-servers',
-  templateUrl: './servers.component.html',
-  styleUrls: ['./servers.component.scss']
+    selector: 'app-servers',
+    templateUrl: './servers.component.html',
+    styleUrls: ['./servers.component.scss']
 })
 export class ServersComponent implements OnInit {
 
-	  public servers: Server[];
-	 public dataSource: any;
+    public servers: Server[];
+    public dataSource: any;
 
-	  	public displayedColumns = ['name', 'url', 'company', 'ip','actions'];
-
-
-
-  constructor(private serversService: ServersService) { }
-
-  ngOnInit() { 
+    public displayedColumns = ['name', 'url', 'company', 'ip', 'actions'];
 
 
-this.getservers();
-  }
+    constructor(private serversService: ServersService, public dialog: MatDialog) {
+    }
+
+    ngOnInit() {
 
 
-  public getservers(): void {
+        this.getservers();
+    }
 
+
+    public getservers(): void {
 
 
         this.servers = []; //for show spinner each time
-        this.serversService.getSevers().subscribe(servers => {this.servers = servers, console.log(servers) 
+        this.serversService.getSevers().subscribe(servers => {
+            this.servers = servers, console.log(servers)
 
 
- this.dataSource = new MatTableDataSource<Server>(this.servers);
+            this.dataSource = new MatTableDataSource<Server>(this.servers);
 
- console.log(this.dataSource);
+            console.log(this.dataSource);
 
-        });    
+        });
 
-       
+
     }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    public openServerDialog(server: Server) {
+
+
+        let dialogRef = this.dialog.open(ServersDialogComponent, {
+            data: server,
+
+            width: '80%',
+        });
+        dialogRef.afterClosed().subscribe(server => {
+            if (server) {
+                console.log(server);
+            (server.id) ? this.updateServer(server) : this.addServer(server);
+            }
+        });
+
+    }
+
+    public addServer(server: Server) {
+        this.serversService.addServer(server).subscribe(server => this.getservers());
+    }
+
+    public updateServer(server: Server) {
+        this.serversService.updateServer(server).subscribe(server => this.getservers());
+    }
+
+    public deleteServer(server: Server) {
+        this.serversService.deleteServer(server.id).subscribe(server => this.getservers());
+    }
 
 }
