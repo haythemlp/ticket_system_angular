@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -8,9 +9,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class UserMenuComponent implements OnInit {
   public userImage = "assets/img/users/user.jpg";
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+
+  public logout():void {
+  
+
+  this.authService.logout();
   }
 
 }

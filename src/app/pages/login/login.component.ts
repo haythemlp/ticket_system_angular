@@ -19,8 +19,8 @@ export class LoginComponent {
     constructor(public appSettings: AppSettings, public fb: FormBuilder, public router: Router, private authService: AuthService) {
         this.settings = this.appSettings.settings;
         this.form = this.fb.group({
-            'email': [null, Validators.compose([Validators.required, emailValidator])],
-            'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+            'username': ["webmaster", Validators.compose([Validators.required])],
+            'password': ["administration", Validators.compose([Validators.required, Validators.minLength(6)])],
             'rememberMe': false
         });
     }

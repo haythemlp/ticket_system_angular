@@ -22,7 +22,7 @@ export const routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
+   // InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
     NgxPaginationModule,
     SharedModule,
     PipesModule    

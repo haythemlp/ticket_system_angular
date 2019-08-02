@@ -3,10 +3,12 @@ import {ModuleWithProviders} from '@angular/core';
 
 import {PagesComponent} from './pages/pages.component';
 import {BlankComponent} from './pages/blank/blank.component';
+import {ServersComponent} from './pages/servers/servers.component';
 import {SearchComponent} from './pages/search/search.component';
 import {NotFoundComponent} from './pages/errors/not-found/not-found.component';
 import {ErrorComponent} from './pages/errors/error/error.component';
-import {AuthGuard} from './gurads/auth.guard';
+import {AuthGuard} from './guards/auth.guard';
+import {GuestGuard} from './guards/guest.guard';
 
 export const routes: Routes = [
     {
@@ -15,8 +17,13 @@ export const routes: Routes = [
             {
                 path: '',
                 loadChildren: './pages/dashboard/dashboard.module#DashboardModule',
-                data: {breadcrumb: 'Accueill'},
-                canActivate: [AuthGuard]
+                data: {breadcrumb: 'Accueill'}
+            },
+
+              {
+                path: 'servers',
+                component: ServersComponent,
+                data: {breadcrumb: 'Servers'}
             },
             {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},
             {
@@ -41,11 +48,11 @@ export const routes: Routes = [
             {path: 'blank', component: BlankComponent, data: {breadcrumb: 'Blank page'}},
             {path: 'search', component: SearchComponent, data: {breadcrumb: 'Search'}},
             {path: 'search/:name', component: SearchComponent, data: {breadcrumb: 'Search'}}
-        ]
+        ],canActivate: [AuthGuard]
     },
     {path: 'landing', loadChildren: './pages/landing/landing.module#LandingModule'},
-    {path: 'login', loadChildren: './pages/login/login.module#LoginModule'},
-    {path: 'register', loadChildren: './pages/register/register.module#RegisterModule'},
+    {path: 'login',canActivate: [GuestGuard] , loadChildren: './pages/login/login.module#LoginModule'},
+    {path: 'register',canActivate: [GuestGuard], loadChildren: './pages/register/register.module#RegisterModule'},
     {path: 'error', component: ErrorComponent, data: {breadcrumb: 'Error'}},
     {path: '**', component: NotFoundComponent}
 ];

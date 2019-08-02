@@ -10,10 +10,9 @@
             <div class="p-3">
                 <a mat-button routerLink="/register" color="accent" class="w-100">Don't have an account? Sign up now!</a>
                 <mat-form-field class="w-100">
-                    <mat-icon matPrefix class="mat-icon-sm mb-2 mr-2 secondary-text-color">mail</mat-icon>
-                    <input matInput placeholder="Email" formControlName="email">
-                    <mat-error *ngIf="form.controls.email.errors?.required">Email is required</mat-error>
-                    <mat-error *ngIf="form.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
+                    <mat-icon matPrefix class="mat-icon-sm mb-2 mr-2 secondary-text-color">username</mat-icon>
+                    <input matInput placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="form.controls.username.errors?.required">Username is required</mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-100">
                     <mat-icon matPrefix class="mat-icon-sm mb-2 mr-2 secondary-text-color">lock</mat-icon>

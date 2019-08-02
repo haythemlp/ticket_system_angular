@@ -42,6 +42,9 @@ export class PagesComponent implements OnInit {
     this.menuOption = this.settings.menu; 
     this.menuTypeOption = this.settings.menuType; 
     this.defaultMenu = this.settings.menu;
+
+
+    
   }
 
   ngAfterViewInit(){

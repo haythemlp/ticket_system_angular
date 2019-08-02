@@ -27,6 +27,7 @@ import {BlankComponent} from './pages/blank/blank.component';
 import {SearchComponent} from './pages/search/search.component';
 import {NotFoundComponent} from './pages/errors/not-found/not-found.component';
 import {ErrorComponent} from './pages/errors/error/error.component';
+import { ServersComponent } from './pages/servers/servers.component';
 
 import {TopInfoContentComponent} from './theme/components/top-info-content/top-info-content.component';
 import {SidenavComponent} from './theme/components/sidenav/sidenav.component';
@@ -73,7 +74,8 @@ import {HttpClientModule} from '@angular/common/http';
         ApplicationsComponent,
         MessagesComponent,
         UserMenuComponent,
-        FavoritesComponent
+        FavoritesComponent,
+        ServersComponent
     ],
     providers: [
         AppSettings,

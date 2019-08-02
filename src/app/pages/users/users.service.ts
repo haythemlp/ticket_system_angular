@@ -6,7 +6,17 @@ import { User } from './user.model';
 @Injectable()
 export class UsersService {
     public url = "api/users";
+    public appUrl="http://127.0.0.1:8000/api/users";
+    public token =localStorage.getItem('token');
     constructor(public http:HttpClient) { }
+
+
+  getUsersformServer(): Observable<User[]> {
+     
+
+return  this.http.get<User[]>(this.appUrl+'?token='+this.token);
+
+    }
     
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.url);

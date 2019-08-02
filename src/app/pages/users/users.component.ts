@@ -26,13 +26,18 @@ export class UsersComponent implements OnInit {
         this.settings = this.appSettings.settings; 
     }
 
-    ngOnInit() {
-        this.getUsers();         
+    ngOnInit() { 
+console.log("work");
+     this.getUsers();
+
     }
 
     public getUsers(): void {
+
         this.users = null; //for show spinner each time
-        this.usersService.getUsers().subscribe(users => this.users = users);    
+        this.usersService.getUsersformServer().subscribe(users => {this.users = users, console.log(users) });    
+
+       
     }
     public addUser(user:User){
         this.usersService.addUser(user).subscribe(user => this.getUsers());

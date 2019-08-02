@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-const apiUrl = 'http://127.0.0.1:8000/api/';
+const apiUrl = 'http://127.0.0.1:8000/api/auth/';
 
 
 @Injectable({
@@ -16,21 +16,35 @@ export class AuthService {
 
     login(form): void {
         this.http.post(apiUrl + 'login', form).subscribe((data) => {
-                // console.log(data);
-                localStorage.setItem('user', JSON.stringify(data));
-                this.router.navigate(['/users']);
-            }, error1 => alert(error1)
+                 console.log(data);
+                localStorage.setItem('user', JSON.stringify(data.data.user));
+                 localStorage.setItem('token', data.data.token);
+
+                 console.log(localStorage.getItem('user'));
+                  console.log(localStorage.getItem('token'));
+            this.router.navigate(['/']);
+            }, error => alert(error)
+        );
+
+
+    }
+
+    logout(): void {
+        this.http.post(apiUrl + 'logout?token='+localStorage.getItem('token'), {}).subscribe((data) => {
+                 console.log(data);
+                localStorage.clear();
+            this.router.navigate(['/login']);
+            }, error => alert(error)
         );
 
 
     }
 
     public me(token): Observable<any> {
-
-
-        return this.http.post(apiUrl + 'auth/refresh?token=' + token, {});
-
-
+        return this.http.post(apiUrl + 'me?token=' + token, {});
     }
+
+
+
 
 }
