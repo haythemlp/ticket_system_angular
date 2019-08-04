@@ -1,24 +1,25 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppSettings } from '../../../app.settings';
-import { Settings } from '../../../app.settings.model';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AppSettings} from '../../../app.settings';
+import {Settings} from '../../../app.settings.model';
 
 @Component({
-  selector: 'app-error',
-  templateUrl: './error.component.html'
+    selector: 'app-error',
+    templateUrl: './error.component.html'
 })
 export class ErrorComponent {
-  public settings: Settings;
-  constructor(public appSettings:AppSettings, public router:Router) {
-    this.settings = this.appSettings.settings; 
-  }
+    public settings: Settings;
 
-  goHome(): void {
-    this.router.navigate(['/']);
-  }
+    constructor(public appSettings: AppSettings, public router: Router) {
+        this.settings = this.appSettings.settings;
+    }
 
-  ngAfterViewInit(){
-    this.settings.loadingSpinner = false;  
-  } 
+    goHome(): void {
+        this.router.navigate(['/']);
+    }
+
+    ngAfterViewInit() {
+        this.settings.loadingSpinner = false;
+    }
 
 }

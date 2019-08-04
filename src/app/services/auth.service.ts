@@ -13,16 +13,12 @@ export class AuthService {
     constructor(private router: Router, private http: HttpClient) {
     }
 
-
     login(form): void {
         this.http.post<any>(apiUrl + 'login', form).subscribe((data) => {
-                 console.log(data);
+                console.log(data);
                 localStorage.setItem('user', JSON.stringify(data.data.user));
-                 localStorage.setItem('token', data.data.token);
-
-                 console.log(localStorage.getItem('user'));
-                  console.log(localStorage.getItem('token'));
-            this.router.navigate(['/']);
+                localStorage.setItem('token', data.data.token);
+                this.router.navigate(['/']);
             }, error => alert(error)
         );
 
@@ -30,10 +26,10 @@ export class AuthService {
     }
 
     logout(): void {
-        this.http.post(apiUrl + 'logout?token='+localStorage.getItem('token'), {}).subscribe((data) => {
-                 console.log(data);
+        this.http.post(apiUrl + 'logout?token=' + localStorage.getItem('token'), {}).subscribe((data) => {
+                console.log(data);
                 localStorage.clear();
-            this.router.navigate(['/login']);
+                this.router.navigate(['/login']);
             }, error => alert(error)
         );
 
@@ -43,8 +39,6 @@ export class AuthService {
     public me(token): Observable<any> {
         return this.http.post(apiUrl + 'me?token=' + token, {});
     }
-
-
 
 
 }

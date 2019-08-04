@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {emailValidator} from '../../theme/utils/app-validators';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppSettings} from '../../app.settings';
 import {Settings} from '../../app.settings.model';
 import {AuthService} from '../../services/auth.service';
@@ -27,7 +26,7 @@ export class LoginComponent {
 
     public onSubmit(values: Object): void {
         if (this.form.valid) {
-console.log(this.form);
+
             this.authService.login(this.form.value);
             //this.router.navigate(['/']);
         }

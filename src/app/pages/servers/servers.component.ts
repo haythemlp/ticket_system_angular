@@ -12,6 +12,7 @@ import {ServersDialogComponent} from "./servers-dialog/servers-dialog.component"
 export class ServersComponent implements OnInit {
 
     public servers: Server[];
+    public showSearch: boolean = false;
     public dataSource: any;
 
     public displayedColumns = ['name', 'url', 'company', 'ip', 'actions'];

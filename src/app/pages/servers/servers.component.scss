@@ -1,4 +1,35 @@
-.vertical-tabs.mat-tab-group .mat-tab-body-wrapper {
-  padding: 0 16px;
-  width: 100%;
+.vertical-tabs.mat-tab-group {
+  .mat-tab-body-wrapper {
+
+    padding: 0 16px;
+    width: 100%;
+  }
+
+}
+
+.server-search {
+  width: 0;
+  overflow: hidden;
+  transition: 0.3s;
+  font-size: 14px;
+
+  .mat-form-field {
+    width: 100% !important;
+    text-align: center !important;
+    height: 36px;
+  }
+
+  .mat-form-field-infix {
+    padding: 5px;
+    width: 100px;
+  }
+
+  .mat-input-element {
+    text-align: center;
+  }
+
+  &.show {
+    width: 100%;
+    overflow: visible;
+  }
 }

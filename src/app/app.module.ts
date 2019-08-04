@@ -27,8 +27,6 @@ import {BlankComponent} from './pages/blank/blank.component';
 import {SearchComponent} from './pages/search/search.component';
 import {NotFoundComponent} from './pages/errors/not-found/not-found.component';
 import {ErrorComponent} from './pages/errors/error/error.component';
-import { ServersComponent } from './pages/servers/servers.component';
-
 import {TopInfoContentComponent} from './theme/components/top-info-content/top-info-content.component';
 import {SidenavComponent} from './theme/components/sidenav/sidenav.component';
 import {VerticalMenuComponent} from './theme/components/menu/vertical-menu/vertical-menu.component';
@@ -40,8 +38,7 @@ import {MessagesComponent} from './theme/components/messages/messages.component'
 import {UserMenuComponent} from './theme/components/user-menu/user-menu.component';
 import {FavoritesComponent} from './theme/components/favorites/favorites.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ServersDialogComponent } from './pages/servers/servers-dialog/servers-dialog.component';
-import {UserDialogComponent} from "./pages/users/user-dialog/user-dialog.component";
+
 
 
 @NgModule({
@@ -50,9 +47,6 @@ import {UserDialogComponent} from "./pages/users/user-dialog/user-dialog.compone
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyBNcjxo_35qnEG17dQvvftWa68eZWepYE0'
-        }),
         PerfectScrollbarModule,
         CalendarModule.forRoot(),
         SharedModule,
@@ -76,9 +70,7 @@ import {UserDialogComponent} from "./pages/users/user-dialog/user-dialog.compone
         ApplicationsComponent,
         MessagesComponent,
         UserMenuComponent,
-        FavoritesComponent,
-        ServersComponent,
-        ServersDialogComponent
+        FavoritesComponent
     ],
     providers: [
         AppSettings,
@@ -87,8 +79,6 @@ import {UserDialogComponent} from "./pages/users/user-dialog/user-dialog.compone
     ],
     bootstrap: [
         AppComponent
-    ], entryComponents: [
-        ServersDialogComponent
     ]
 })
 export class AppModule {

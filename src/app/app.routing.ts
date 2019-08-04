@@ -22,7 +22,7 @@ export const routes: Routes = [
 
               {
                 path: 'servers',
-                component: ServersComponent,
+                loadChildren: './pages/servers/servers.module#ServersModule',
                 data: {breadcrumb: 'Servers'}
             },
             {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},

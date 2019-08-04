@@ -23,6 +23,11 @@ export class ServersService {
 
     }
 
+    public showSever(id): Observable<Server> {
+        return this.http.get<Server>(this.appUrl + '/' + id + '?token=' + this.token);
+
+    }
+
 
     addServer(server: Server) {
         return this.http.post(this.appUrl + '?token=' + this.token, server);
