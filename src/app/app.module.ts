@@ -4,6 +4,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {CustomOverlayContainer} from './theme/utils/custom-overlay-container';
+import { MAT_DATE_LOCALE } from '@angular/material';
+
 
 import {AgmCoreModule} from '@agm/core';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -75,7 +77,8 @@ import {HttpClientModule} from '@angular/common/http';
     providers: [
         AppSettings,
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG},
-        {provide: OverlayContainer, useClass: CustomOverlayContainer}
+        {provide: OverlayContainer, useClass: CustomOverlayContainer},
+        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
     ],
     bootstrap: [
         AppComponent

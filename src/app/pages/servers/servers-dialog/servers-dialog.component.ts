@@ -30,7 +30,7 @@ export class ServersDialogComponent implements OnInit {
             db_host: null,
             db_user: null,
             db_pass: null,
-            status: null,
+            status: 0,
             start: [null],
             deadline: null,
 
@@ -41,13 +41,14 @@ export class ServersDialogComponent implements OnInit {
         if (this.server) {
 
             this.form.patchValue(this.server);
+           this.form.controls['status'].setValue(this.server.status);
 
 
         } else {
             this.server = new Server();
         }
         this.form.updateValueAndValidity();
-        console.log(this.server);
+        console.log(this.form);
     }
 
 

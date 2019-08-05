@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("work");
+ 
         this.getUsers();
 
     }
@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
 
         this.users = null; //for show spinner each time
         this.usersService.getUsers().subscribe(users => {
-            this.users = users, console.log(users)
+            this.users = users;
         });
 
 
@@ -70,9 +70,12 @@ export class UsersComponent implements OnInit {
 
 
         let dialogRef = this.dialog.open(UserDialogComponent, {
-            data: user
+            data: user,
+
+            width: '80%',
         });
         dialogRef.afterClosed().subscribe(user => {
+       console.log(user);
             if (user) {
                 console.log(user);
                 (user.id) ? this.updateUser(user) : this.addUser(user);

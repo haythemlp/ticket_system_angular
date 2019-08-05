@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit,ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import {User} from '../user.model';
 
 @Component({
@@ -9,22 +10,16 @@ import {User} from '../user.model';
     styleUrls: ['./user-dialog.component.scss']
 })
 export class UserDialogComponent implements OnInit {
+
+ @ViewChild("fileInput") fileInput;   
+  public civils=['Monsieur','Madame'];
+     public fonctions=['web developer','ceo','secretaire'];
+        public comps=['php','mysql','java'];
+
+
     public form: FormGroup;
     public passwordHide: boolean = true;
-    public colors = [
-        {value: 'gradient-purple', viewValue: 'Purple'},
-        {value: 'gradient-indigo', viewValue: 'Indigo'},
-        {value: 'gradient-teal', viewValue: 'Teal'},
-        {value: 'gradient-blue', viewValue: 'Blue'},
-        {value: 'gradient-orange', viewValue: 'Orange'},
-        {value: 'gradient-green', viewValue: 'Green'},
-        {value: 'gradient-pink', viewValue: 'Pink'},
-        {value: 'gradient-red', viewValue: 'Red'},
-        {value: 'gradient-amber', viewValue: 'Amber'},
-        {value: 'gradient-gray', viewValue: 'Gray'},
-        {value: 'gradient-brown', viewValue: 'Brown'},
-        {value: 'gradient-lime', viewValue: 'Lime'}
-    ];
+ 
 
     constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public user: User,
@@ -36,7 +31,14 @@ export class UserDialogComponent implements OnInit {
             firstname: null,
             lastname: null,
             email: [null, Validators.compose([Validators.required, Validators.email])],
-            isActive: '0'
+            is_active: false,
+            civilite:null,
+            fonction:null,
+            tel:null,
+            mobile:null,
+            date_birth:null,
+            competance:null,
+            avatar:null,
 
         });
     }
@@ -44,6 +46,8 @@ export class UserDialogComponent implements OnInit {
     ngOnInit() {
         if (this.user) {
             console.log(this.user);
+
+this.user.competance=JSON.parse(this.user.competance);
             this.form.patchValue(this.user);
 
 
@@ -52,11 +56,23 @@ export class UserDialogComponent implements OnInit {
             this.form.controls["password"].setValidators(Validators.required);
         }
         this.form.updateValueAndValidity();
-        console.log(this.form);
+   
     }
 
     close(): void {
         this.dialogRef.close();
+    }
+
+    upload(){
+let fi = this.fileInput.nativeElement;
+if (fi.files && fi.files[0]) {
+    let fileToUpload = fi.files[0];
+ 
+  this.form.controls["avatar"].setValue(fileToUpload);
+
+      }
+
+             
     }
 
 }

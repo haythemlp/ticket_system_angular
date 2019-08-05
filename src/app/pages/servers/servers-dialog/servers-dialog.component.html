@@ -1,10 +1,12 @@
-<h1 mat-dialog-title><span *ngIf="!server.id">Add</span><span *ngIf="server.id">Edit</span> user</h1>
+<h1 mat-dialog-title><span *ngIf="!server.id">Add</span><span *ngIf="server.id">Edit</span> Server</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
         <mat-tab-group class="vertical-tabs">
             <mat-tab label="Basic">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
+                    <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>person</mat-icon>
                             Name
@@ -15,7 +17,11 @@
                             characters
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field class="w-100">
+                </mat-grid-tile>
+                  <mat-grid-tile >
+               
+                
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon>
                             URL
@@ -23,8 +29,10 @@
                         <input matInput formControlName="url" type="url">
 
                     </mat-form-field>
+                   </mat-grid-tile>
+                  <mat-grid-tile >
 
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon>
                             Company
@@ -32,67 +40,92 @@
                         <input matInput formControlName="company" type="url">
 
                     </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
 
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon>
                             CEO
                         </mat-placeholder>
                         <input matInput formControlName="ceo" type="url">
                     </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
 
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon>
                             IP
                         </mat-placeholder>
                         <input matInput formControlName="ip" type="url">
                     </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
 
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder>
                             <mat-icon>vpn_key</mat-icon>
                             GIT token
                         </mat-placeholder>
                         <input matInput formControlName="git_token" type="url">
                     </mat-form-field>
+                        </mat-grid-tile>
+                </mat-grid-list>
 
-                    <mat-radio-group formControlName="status">
-                        <mat-radio-button value="1" class="mx-2">Active</mat-radio-button>
-                        <mat-radio-button value="0" class="mx-2">Blocked</mat-radio-button>
-                    </mat-radio-group>
+                     <mat-slide-toggle formControlName="status" class="my-2">Active</mat-slide-toggle>
+
+                  
                 </div>
             </mat-tab>
             <mat-tab label="SSH">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
+                       <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="Host" formControlName="ssh_host">
                     </mat-form-field>
-                    <mat-form-field class="w-100">
+                </mat-grid-tile>
+                 <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="User" formControlName="ssh_user">
                     </mat-form-field>
-                  <mat-form-field class="w-100">
+                      </mat-grid-tile>
+                 <mat-grid-tile >
+                  <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="Pass" formControlName="ssh_pass">
                     </mat-form-field>
+                      </mat-grid-tile>
+                 </mat-grid-list>
 
                 </div>
             </mat-tab>
 
           <mat-tab label="Database">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
+                       <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="Host" formControlName="url_host">
                     </mat-form-field>
-                    <mat-form-field class="w-100">
+                         </mat-grid-tile>
+                 <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="User" formControlName="db_user">
                     </mat-form-field>
-                  <mat-form-field class="w-100">
+                         </mat-grid-tile>
+                 <mat-grid-tile >
+                  <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="Pass" formControlName="db_pass">
                     </mat-form-field>
+                         </mat-grid-tile>
+                 <mat-grid-tile >
 
-                  <mat-form-field class="w-100">
+                  <mat-form-field class="w-100 mr-2">
                         <input matInput placeholder="Pass" formControlName="db_pass">
                     </mat-form-field>
+                         </mat-grid-tile>
+                 </mat-grid-list>
 
                 </div>
             </mat-tab>

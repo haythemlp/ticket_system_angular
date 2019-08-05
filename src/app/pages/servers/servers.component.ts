@@ -14,6 +14,7 @@ export class ServersComponent implements OnInit {
     public servers: Server[];
     public showSearch: boolean = false;
     public dataSource: any;
+    public spiner:boolean =false;
 
     public displayedColumns = ['name', 'url', 'company', 'ip', 'actions'];
 
@@ -23,25 +24,27 @@ export class ServersComponent implements OnInit {
 
     ngOnInit() {
 
+ this.getservers();
 
-        this.getservers();
+       
     }
 
 
     public getservers(): void {
 
 
-        this.servers = []; //for show spinner each time
-        this.serversService.getSevers().subscribe(servers => {
-            this.servers = servers, console.log(servers)
 
-
+   this.serversService.getSevers().subscribe(servers => {
+            this.servers = servers;
             this.dataSource = new MatTableDataSource<Server>(this.servers);
+            this.spiner=true;
 
-            console.log(this.dataSource);
+     });
 
-        });
 
+
+    
+     
 
     }
 
@@ -59,7 +62,6 @@ export class ServersComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(server => {
             if (server) {
-                console.log(server);
             (server.id) ? this.updateServer(server) : this.addServer(server);
             }
         });

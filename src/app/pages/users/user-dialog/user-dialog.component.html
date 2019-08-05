@@ -4,102 +4,117 @@
         <mat-tab-group class="vertical-tabs">
             <mat-tab label="Basic">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
+                        <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder><mat-icon>person</mat-icon> Username</mat-placeholder>
                         <input matInput formControlName="username" required>
                         <mat-error *ngIf="form.controls.username.errors?.required">Username is required</mat-error>
                         <mat-error *ngIf="form.controls.username.hasError('minlength')">Username isn't long enough, minimum of 5 characters</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="w-100">
+                </mat-grid-tile>
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
                         <mat-placeholder><mat-icon>vpn_key</mat-icon> Password</mat-placeholder>
                         <input matInput formControlName="password"  [type]="passwordHide ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
 
                         <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
                     </mat-form-field>
-                </div>
-            </mat-tab>
-            <mat-tab label="Personal" >
-                <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="First name" formControlName="firstname">
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="Last name" formControlName="lastname">
-                    </mat-form-field>
+                </mat-grid-tile>
+                                <mat-grid-tile >
 
-                    <mat-form-field class="w-100">
+                    <mat-form-field class="w-100 mr-2">
                         <input matInput type="email" placeholder="Email" formControlName="email">
                         <mat-error *ngIf="form.controls.email.errors?.required">email is required</mat-error>
                         <mat-error *ngIf="form.controls.email.hasError('email')">data should be email</mat-error>
                     </mat-form-field>
+</mat-grid-tile>
+     <mat-grid-tile >
+                   
+                       <mat-slide-toggle formControlName="is_active" class="my-2">Active</mat-slide-toggle>
+                </mat-grid-tile>
+            </mat-grid-list>
+                </div>
+            </mat-tab>
+            <mat-tab label="Personal" >
+                <div fxLayout="column" class="form-field-outer">
+                     <mat-grid-list cols="2" rowHeight="70px">
+                           <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="First name" formControlName="firstname">
+                    </mat-form-field>
+                </mat-grid-tile>
+     <mat-grid-tile >              
+          <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Last name" formControlName="lastname">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                   <mat-form-field class="w-100 mr-2">
+                       <mat-select placeholder="Choose fonction" formControlName="fonction" name="fonction">
+                           <mat-option *ngFor="let fonction of fonctions" [value]="fonction">
+                               <div fxLayout="row" fxLayoutAlign="start center">
+                                  
+                                   <span class="mx-3">{{fonction}}</span> 
+                               </div>                               
+                           </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
 
-                    <mat-radio-group formControlName="isActive">
-                        <mat-radio-button   value="1" class="mx-2">Active</mat-radio-button>
-                        <mat-radio-button   value="0" class="mx-2">Blocked</mat-radio-button>
-                    </mat-radio-group>
+                   <mat-grid-tile>
+                    <mat-form-field class="w-100 mr-2">
+                         <mat-select placeholder="Choose civilite" formControlName="civilite" name="civilite">
+                           <mat-option *ngFor="let civil of civils" [value]="civil">
+                               <div fxLayout="row" fxLayoutAlign="start center">
+                                  
+                                   <span class="mx-3">{{civil}}</span> 
+                               </div>                               
+                           </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+                   <mat-grid-tile>
+                          <mat-form-field class="w-100 mr-2">
+                    <input matInput placeholder="Phone" formControlName="mobile">
+                </mat-form-field>
+                </mat-grid-tile>
+
+                     <mat-grid-tile>
+                          <mat-form-field class="w-100 mr-2">
+                    <input matInput placeholder="Tel" formControlName="tel">
+                      </mat-form-field>
+                </mat-grid-tile>
+
+           
+
+         <mat-grid-tile>
+                         <mat-form-field  class="w-100 mr-2">
+                    <input matInput [matDatepicker]="picker1" placeholder="Choose a date" formControlName="date_birth">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                </mat-grid-tile>
+
+
+         <mat-grid-tile>
+                          <mat-form-field class="w-100 mr-2">
+                    <mat-select placeholder="competances" formControlName="competance" multiple>
+                        <mat-option *ngFor="let comp of comps" [value]="comp">{{comp}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </mat-grid-tile>
+
+                     <mat-grid-tile>
+                          <div class="w-100 mr-2">
+                    <input  type="file" #fileInput placeholder="Tel" (change)="upload()"   >
+                </div>
+                </mat-grid-tile>
+            </mat-grid-list>
 
                 </div>
             </mat-tab>
-<!--            <mat-tab label="Work" formGroupName="work">-->
-<!--                <div fxLayout="column" class="form-field-outer">-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Company" formControlName="company">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Position" formControlName="position">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Salary" formControlName="salary">-->
-<!--                        <span matPrefix>$&nbsp;</span>-->
-<!--                        <span matSuffix>.00</span>-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </mat-tab>-->
-<!--            <mat-tab label="Contacts" formGroupName="contacts">-->
-<!--                <div fxLayout="column" class="form-field-outer">-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Email" formControlName="email">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Phone" formControlName="phone">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Address" formControlName="address">-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </mat-tab>-->
-<!--            <mat-tab label="Social life" formGroupName="social">-->
-<!--                <div fxLayout="column" class="form-field-outer">-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Facebook" formControlName="facebook">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Twitter" formControlName="twitter">-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field class="w-100">-->
-<!--                        <input matInput placeholder="Google" formControlName="google">-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </mat-tab>-->
-<!--            <mat-tab label="Settings" formGroupName="settings">-->
-<!--                <div fxLayout="column" class="form-field-outer">-->
-<!--                    <mat-checkbox formControlName="isActive" class="pb-3">Active</mat-checkbox>-->
-<!--                    <mat-checkbox formControlName="isDeleted" class="pb-3">Blocked</mat-checkbox>-->
-<!--                    <p *ngIf="user.id" class="pb-3"><span>Registration date:</span> <i class="mx-1">{{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> -->
-<!--                    <p *ngIf="user.id" class="pb-3"><span>Last joined date:</span> <i class="mx-1">{{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     -->
-<!--                    <mat-form-field>-->
-<!--                        <mat-select placeholder="Choose bg color" formControlName="bgColor" name="bgColor">-->
-<!--                            <mat-option *ngFor="let color of colors" [value]="color.value">-->
-<!--                                <div fxLayout="row" fxLayoutAlign="start center">-->
-<!--                                    <div class="p-2" [ngClass]="color.value"></div>-->
-<!--                                    <span class="mx-3">{{color.viewValue}}</span> -->
-<!--                                </div>                               -->
-<!--                            </mat-option>-->
-<!--                        </mat-select>-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </mat-tab>-->
         </mat-tab-group>
     </form>
 </div>

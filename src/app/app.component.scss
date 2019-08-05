@@ -80,7 +80,7 @@
     100%{opacity: 0}
 }
 
-.vertical-tabs.mat-tab-group .mat-tab-body-wrapper {
+.vertical-tabs.mat-tab-group {
+.mat-tab-body-wrapper { width: 100%;}
 
-    width: 100%;
 }
