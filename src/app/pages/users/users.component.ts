@@ -5,6 +5,7 @@ import {Settings} from '../../app.settings.model';
 import {User} from './user.model';
 import {UsersService} from './users.service';
 import {UserDialogComponent} from './user-dialog/user-dialog.component';
+import {environment} from "../../../environments/environment.prod";
 
 @Component({
     selector: 'app-users',
@@ -14,6 +15,7 @@ import {UserDialogComponent} from './user-dialog/user-dialog.component';
     providers: [UsersService]
 })
 export class UsersComponent implements OnInit {
+    public mediaUrl = environment.mediaUrl;
     public users: User[];
     public searchText: string;
     public page: any;
@@ -28,7 +30,7 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
- 
+
         this.getUsers();
 
     }
@@ -70,12 +72,12 @@ export class UsersComponent implements OnInit {
 
 
         let dialogRef = this.dialog.open(UserDialogComponent, {
-            data: user,
+            data: Object.assign({}, user),
 
             width: '80%',
         });
         dialogRef.afterClosed().subscribe(user => {
-       console.log(user);
+            console.log(user);
             if (user) {
                 console.log(user);
                 (user.id) ? this.updateUser(user) : this.addUser(user);

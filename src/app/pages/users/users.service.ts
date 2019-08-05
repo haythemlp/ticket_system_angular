@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from './user.model';
+import {environment} from '../../../environments/environment.prod';
 
 @Injectable()
 export class UsersService {
 
-    public appUrl = "http://127.0.0.1:8000/api/users";
+    public appUrl = environment.apiUrl + 'users';
     public token = localStorage.getItem('token');
 
     constructor(public http: HttpClient) {
@@ -18,27 +19,26 @@ export class UsersService {
 
     addUser(user: User) {
 
-  let input = new FormData();
-    input.append("file", user.avatar);
-      input.append("data",JSON.stringify(user) );
 
-        return this.http.post(this.appUrl + '?token=' + this.token, input);
+        return this.http.post(this.appUrl + '?token=' + this.token, user);
     }
 
     updateUser(user: User) {
-          let input = new FormData();
+        const input = new FormData();
+        input.append('avatar', user.avatar);
+        console.log(input.get('avatar'));
+        input.append('data', JSON.stringify(user));
 
-          console.log(user)
-    input.append("avatar", user.avatar);
-      input.append("data", JSON.stringify(user));
-      let headers = {'Content-Type' : undefined };
-let options = { headers: headers };
+        input.append('_method', 'PUT');
 
-console.log(input);
-        return this.http.put(this.appUrl + '/' + user.id + '?token=' + this.token, input,options);
+        console.log(input.get('data'))
+        const headers = {'Content-Type': undefined};
+        const options = {headers: headers};
+
+        return this.http.post(this.appUrl + '/' + user.id + '?token=' + this.token, input);
     }
 
     deleteUser(id: number) {
-        return this.http.delete(this.appUrl + "/" + id + '?token=' + this.token);
+        return this.http.delete(this.appUrl + '/' + id + '?token=' + this.token);
     }
-} 
+}

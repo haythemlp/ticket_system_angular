@@ -37,7 +37,8 @@
                 <div fxFlex="35" fxLayout="column" fxLayoutAlign="center center" class="bg-primary">
                     <div class="user-img">
                         
-                        <img  src="assets/img/users/default-user.jpg" class="transition mb-2" >  
+                        <img *ngIf="!user.avatar" src="assets/img/users/default-user.jpg" class="transition mb-2" >
+                        <img  *ngIf="user.avatar" src="{{mediaUrl+user.avatar}}" class="transition mb-2" >
                         <div fxLayout="row" fxLayoutAlign="center center" class="social-icons">
                             <a [href]="'https://www.facebook.com/'" target="_blank">
                                 <svg class="mat-icon mat-icon-sm mx-1" viewBox="0 0 24 24">

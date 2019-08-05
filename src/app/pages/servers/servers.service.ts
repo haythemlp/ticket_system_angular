@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Server} from './server';
+import {environment} from '../../../environments/environment.prod';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,7 @@ import {Server} from './server';
 export class ServersService {
 
 
-    public appUrl = 'http://127.0.0.1:8000/api/servers';
+    public appUrl = environment.apiUrl + 'servers';
     public token = localStorage.getItem('token');
 
     constructor(public http: HttpClient) {

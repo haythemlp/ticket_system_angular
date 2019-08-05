@@ -1,117 +1,130 @@
 <h1 mat-dialog-title><span *ngIf="!user.id">Add</span><span *ngIf="user.id">Edit</span> user</h1>
 <div mat-dialog-content>
-    <form [formGroup]="form" class="user-form">      
+    <form [formGroup]="form" class="user-form">
         <mat-tab-group class="vertical-tabs">
             <mat-tab label="Basic">
                 <div fxLayout="column" class="form-field-outer">
-                        <mat-grid-list cols="2" rowHeight="70px">
-                       <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder><mat-icon>person</mat-icon> Username</mat-placeholder>
-                        <input matInput formControlName="username" required>
-                        <mat-error *ngIf="form.controls.username.errors?.required">Username is required</mat-error>
-                        <mat-error *ngIf="form.controls.username.hasError('minlength')">Username isn't long enough, minimum of 5 characters</mat-error>
-                    </mat-form-field>
-                </mat-grid-tile>
-                       <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder><mat-icon>vpn_key</mat-icon> Password</mat-placeholder>
-                        <input matInput formControlName="password"  [type]="passwordHide ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <mat-grid-list cols="2" rowHeight="70px">
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-placeholder>
+                                    <mat-icon>person</mat-icon>
+                                    Username
+                                </mat-placeholder>
+                                <input matInput formControlName="username" required>
+                                <mat-error *ngIf="form.controls.username.errors?.required">Username is required
+                                </mat-error>
+                                <mat-error *ngIf="form.controls.username.hasError('minlength')">Username isn't long
+                                    enough, minimum of 5 characters
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-placeholder>
+                                    <mat-icon>vpn_key</mat-icon>
+                                    Password
+                                </mat-placeholder>
+                                <input matInput formControlName="password" [type]="passwordHide ? 'password' : 'text'">
+                                <mat-icon matSuffix
+                                          (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
 
-                        <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
-                    </mat-form-field>
-                </mat-grid-tile>
-                                <mat-grid-tile >
+                                <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long
+                                    enough, minimum of 6 characters
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
 
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput type="email" placeholder="Email" formControlName="email">
-                        <mat-error *ngIf="form.controls.email.errors?.required">email is required</mat-error>
-                        <mat-error *ngIf="form.controls.email.hasError('email')">data should be email</mat-error>
-                    </mat-form-field>
-</mat-grid-tile>
-     <mat-grid-tile >
-                   
-                       <mat-slide-toggle formControlName="is_active" class="my-2">Active</mat-slide-toggle>
-                </mat-grid-tile>
-            </mat-grid-list>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput type="email" placeholder="Email" formControlName="email">
+                                <mat-error *ngIf="form.controls.email.errors?.required">email is required</mat-error>
+                                <mat-error *ngIf="form.controls.email.hasError('email')">data should be email
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+
+                            <mat-slide-toggle formControlName="is_active" class="my-2">Active</mat-slide-toggle>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </div>
             </mat-tab>
-            <mat-tab label="Personal" >
+            <mat-tab label="Personal">
                 <div fxLayout="column" class="form-field-outer">
-                     <mat-grid-list cols="2" rowHeight="70px">
-                           <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="First name" formControlName="firstname">
-                    </mat-form-field>
-                </mat-grid-tile>
-     <mat-grid-tile >              
-          <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Last name" formControlName="lastname">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                   <mat-form-field class="w-100 mr-2">
-                       <mat-select placeholder="Choose fonction" formControlName="fonction" name="fonction">
-                           <mat-option *ngFor="let fonction of fonctions" [value]="fonction">
-                               <div fxLayout="row" fxLayoutAlign="start center">
-                                  
-                                   <span class="mx-3">{{fonction}}</span> 
-                               </div>                               
-                           </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                </mat-grid-tile>
+                    <mat-grid-list cols="2" rowHeight="70px">
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="First name" formControlName="firstname">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Last name" formControlName="lastname">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-select placeholder="Choose fonction" formControlName="fonction" name="fonction">
+                                    <mat-option *ngFor="let fonction of fonctions" [value]="fonction">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
 
-                   <mat-grid-tile>
-                    <mat-form-field class="w-100 mr-2">
-                         <mat-select placeholder="Choose civilite" formControlName="civilite" name="civilite">
-                           <mat-option *ngFor="let civil of civils" [value]="civil">
-                               <div fxLayout="row" fxLayoutAlign="start center">
-                                  
-                                   <span class="mx-3">{{civil}}</span> 
-                               </div>                               
-                           </mat-option>
-                      </mat-select>
-                  </mat-form-field>
-                </mat-grid-tile>
-                   <mat-grid-tile>
-                          <mat-form-field class="w-100 mr-2">
-                    <input matInput placeholder="Phone" formControlName="mobile">
-                </mat-form-field>
-                </mat-grid-tile>
+                                            <span class="mx-3">{{fonction}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-                     <mat-grid-tile>
-                          <mat-form-field class="w-100 mr-2">
-                    <input matInput placeholder="Tel" formControlName="tel">
-                      </mat-form-field>
-                </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-select placeholder="Choose civilite" formControlName="civilite" name="civilite">
+                                    <mat-option *ngFor="let civil of civils" [value]="civil">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
 
-           
+                                            <span class="mx-3">{{civil}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Phone" formControlName="mobile">
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-         <mat-grid-tile>
-                         <mat-form-field  class="w-100 mr-2">
-                    <input matInput [matDatepicker]="picker1" placeholder="Choose a date" formControlName="date_birth">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Tel" formControlName="tel">
+                            </mat-form-field>
+                        </mat-grid-tile>
 
 
-         <mat-grid-tile>
-                          <mat-form-field class="w-100 mr-2">
-                    <mat-select placeholder="competances" formControlName="competance" multiple>
-                        <mat-option *ngFor="let comp of comps" [value]="comp">{{comp}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput [matDatepicker]="picker1" placeholder="Choose a date"
+                                       formControlName="date_birth">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-                     <mat-grid-tile>
-                          <div class="w-100 mr-2">
-                    <input  type="file" #fileInput placeholder="Tel" (change)="upload()"   >
-                </div>
-                </mat-grid-tile>
-            </mat-grid-list>
+
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-select placeholder="competances" formControlName="competance" multiple>
+                                    <mat-option *ngFor="let comp of comps" [value]="comp">{{comp}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <div class="w-100 mr-2">
+                                <input type="file" #fileInput placeholder="Tel" (change)="upload()">
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
 
                 </div>
             </mat-tab>
@@ -119,6 +132,7 @@
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.id">Save</span><span *ngIf="user.id">Update</span></button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
+            *ngIf="!user.id">Save</span><span *ngIf="user.id">Update</span></button>
     <button mat-raised-button color="warn" (click)="close()">Cancel</button>
 </div>

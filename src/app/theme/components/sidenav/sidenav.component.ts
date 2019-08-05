@@ -4,6 +4,7 @@ import {AppSettings} from '../../../app.settings';
 import {Settings} from '../../../app.settings.model';
 import {MenuService} from '../menu/menu.service';
 import {User} from '../../../pages/users/user.model';
+import {environment} from "../../../../environments/environment.prod";
 
 @Component({
     selector: 'app-sidenav',
@@ -16,6 +17,7 @@ export class SidenavComponent implements OnInit {
     public psConfig: PerfectScrollbarConfigInterface = {
         wheelPropagation: true
     };
+    public mediaUrl: string = environment.mediaUrl;
     public menuItems: Array<any>;
     public settings: Settings;
     public user: User;
