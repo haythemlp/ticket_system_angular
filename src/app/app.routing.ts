@@ -20,11 +20,8 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Accueill'}
             },
 
-              {
-                path: 'servers',
-                loadChildren: './pages/servers/servers.module#ServersModule',
-                data: {breadcrumb: 'Servers'}
-            },
+            {path: 'servers',loadChildren: './pages/servers/servers.module#ServersModule',data: {breadcrumb: 'Servers'} },
+                {path: 'clients',loadChildren: './pages/clients/clients.module#ClientsModule',data: {breadcrumb: 'Clients'} },
             {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},
             {
                 path: 'dynamic-menu',

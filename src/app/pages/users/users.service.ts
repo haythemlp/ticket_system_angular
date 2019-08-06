@@ -7,38 +7,39 @@ import {environment} from '../../../environments/environment.prod';
 @Injectable()
 export class UsersService {
 
+
     public appUrl = environment.apiUrl + 'users';
     public token = localStorage.getItem('token');
+    public headers={'Authorization': `Bearer ${localStorage.getItem('token')}`};
 
     constructor(public http: HttpClient) {
     }
 
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.appUrl + '?token=' + this.token);
+        return this.http.get<User[]>(this.appUrl ,{headers: this.headers });
     }
 
     addUser(user: User) {
 
+          const input = new FormData();
+        input.append('avatar', user.avatar);
+        input.append('data', JSON.stringify(user));
 
-        return this.http.post(this.appUrl + '?token=' + this.token, user);
+
+        return this.http.post(this.appUrl, input,{headers: this.headers });
     }
 
     updateUser(user: User) {
         const input = new FormData();
         input.append('avatar', user.avatar);
-        console.log(input.get('avatar'));
         input.append('data', JSON.stringify(user));
-
         input.append('_method', 'PUT');
 
-        console.log(input.get('data'))
-        const headers = {'Content-Type': undefined};
-        const options = {headers: headers};
 
-        return this.http.post(this.appUrl + '/' + user.id + '?token=' + this.token, input);
+        return this.http.post(this.appUrl + '/' + user.id, input ,{headers: this.headers });
     }
 
     deleteUser(id: number) {
-        return this.http.delete(this.appUrl + '/' + id + '?token=' + this.token);
+        return this.http.delete(this.appUrl + '/' + id, {headers: this.headers });
     }
 }

@@ -1,0 +1,140 @@
+<h1 mat-dialog-title><span *ngIf="!client.id">Add</span><span *ngIf="client.id">Edit</span> Client</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">
+        <mat-tab-group class="vertical-tabs">
+            <mat-tab label="Basic">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>person</mat-icon>
+                            Name
+                        </mat-placeholder>
+                        <input matInput formControlName="name" required>
+                        <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
+                        <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5
+                            characters
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                  <mat-grid-tile >
+               
+                
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon>
+                            URL
+                        </mat-placeholder>
+                        <input matInput formControlName="url" type="url">
+
+                    </mat-form-field>
+                   </mat-grid-tile>
+                  <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon>
+                            Company
+                        </mat-placeholder>
+                        <input matInput formControlName="company" type="url">
+
+                    </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon>
+                            CEO
+                        </mat-placeholder>
+                        <input matInput formControlName="ceo" type="url">
+                    </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon>
+                            IP
+                        </mat-placeholder>
+                        <input matInput formControlName="ip" type="url">
+                    </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon>
+                            GIT token
+                        </mat-placeholder>
+                        <input matInput formControlName="git_token" type="url">
+                    </mat-form-field>
+                        </mat-grid-tile>
+                </mat-grid-list>
+
+                     <mat-slide-toggle formControlName="status" class="my-2">Active</mat-slide-toggle>
+
+                  
+                </div>
+            </mat-tab>
+            <mat-tab label="SSH">
+                <div fxLayout="column" class="form-field-outer">
+                       <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Host" formControlName="ssh_host">
+                    </mat-form-field>
+                </mat-grid-tile>
+                 <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="User" formControlName="ssh_user">
+                    </mat-form-field>
+                      </mat-grid-tile>
+                 <mat-grid-tile >
+                  <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Pass" formControlName="ssh_pass">
+                    </mat-form-field>
+                      </mat-grid-tile>
+                 </mat-grid-list>
+
+                </div>
+            </mat-tab>
+
+          <mat-tab label="Database">
+                <div fxLayout="column" class="form-field-outer">
+                       <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Host" formControlName="url_host">
+                    </mat-form-field>
+                         </mat-grid-tile>
+                 <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="User" formControlName="db_user">
+                    </mat-form-field>
+                         </mat-grid-tile>
+                 <mat-grid-tile >
+                  <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Pass" formControlName="db_pass">
+                    </mat-form-field>
+                         </mat-grid-tile>
+                 <mat-grid-tile >
+
+                  <mat-form-field class="w-100 mr-2">
+                        <input matInput placeholder="Pass" formControlName="db_pass">
+                    </mat-form-field>
+                         </mat-grid-tile>
+                 </mat-grid-list>
+
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
+            *ngIf="!client.id">Save</span><span *ngIf="client.id">Update</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

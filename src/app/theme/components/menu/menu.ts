@@ -4,6 +4,7 @@ export const verticalMenuItems = [
     new Menu(1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu(2, 'Users', '/users', null, 'supervisor_account', null, false, 0),
     new Menu(3, 'Servers', '/servers', null, 'domain', null, false, 0),
+    new Menu(19, 'Clients', '/clients', null, 'domain', null, false, 0),
     new Menu(18, 'UI Features', null, null, 'computer', null, true, 0),
     new Menu(4, 'Buttons', '/ui/buttons', null, 'keyboard', null, false, 18),
     new Menu(5, 'Cards', '/ui/cards', null, 'card_membership', null, false, 18),

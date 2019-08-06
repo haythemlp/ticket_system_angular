@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 const apiUrl = 'http://127.0.0.1:8000/api/auth/';
+const  headers={'Authorization': `Bearer ${localStorage.getItem('token')}`};
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AuthService {
 
     login(form): void {
         this.http.post<any>(apiUrl + 'login', form).subscribe((data) => {
-                console.log(data);
+                console.log(data.data.token);
                 localStorage.setItem('user', JSON.stringify(data.data.user));
                 localStorage.setItem('token', data.data.token);
                 this.router.navigate(['/']);
@@ -26,7 +27,7 @@ export class AuthService {
     }
 
     logout(): void {
-        this.http.post(apiUrl + 'logout?token=' + localStorage.getItem('token'), {}).subscribe((data) => {
+        this.http.post(apiUrl+'logout', {},{headers:headers}).subscribe((data) => {
                 console.log(data);
                 localStorage.clear();
                 this.router.navigate(['/login']);
@@ -37,7 +38,7 @@ export class AuthService {
     }
 
     public me(token): Observable<any> {
-        return this.http.post(apiUrl + 'me?token=' + token, {});
+        return this.http.post(apiUrl+'me?token='+localStorage.getItem('token'),{headers:headers});
     }
 
 
