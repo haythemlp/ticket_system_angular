@@ -3,20 +3,20 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from './user.model';
 import {environment} from '../../../environments/environment.prod';
+import {HttpService} from '../../services/http.service';
 
 @Injectable()
 export class UsersService {
 
 
     public appUrl = environment.apiUrl + 'users';
-    public token = localStorage.getItem('token');
-    public headers={'Authorization': `Bearer ${localStorage.getItem('token')}`};
 
-    constructor(public http: HttpClient) {
+
+    constructor(private http: HttpService) {
     }
 
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.appUrl ,{headers: this.headers });
+        return this.http.getHttp(this.appUrl );
     }
 
     addUser(user: User) {
@@ -26,7 +26,7 @@ export class UsersService {
         input.append('data', JSON.stringify(user));
 
 
-        return this.http.post(this.appUrl, input,{headers: this.headers });
+        return this.http.postHttp(this.appUrl, input);
     }
 
     updateUser(user: User) {
@@ -36,10 +36,10 @@ export class UsersService {
         input.append('_method', 'PUT');
 
 
-        return this.http.post(this.appUrl + '/' + user.id, input ,{headers: this.headers });
+        return this.http.postHttp(this.appUrl + '/' + user.id, input );
     }
 
     deleteUser(id: number) {
-        return this.http.delete(this.appUrl + '/' + id, {headers: this.headers });
+        return this.http.deleteHttp(this.appUrl + '/' + id);
     }
 }

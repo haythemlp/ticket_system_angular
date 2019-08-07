@@ -3,30 +3,29 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Contact} from '../client';
 import {environment} from '../../../../environments/environment.prod';
+import {HttpService} from "../../../services/http.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
   public appUrl = environment.apiUrl + 'contacts';
-  public token = localStorage.getItem('token');
-  public headers={'Authorization': `Bearer ${localStorage.getItem('token')}`};
 
 
-    constructor(public http: HttpClient) {
+    constructor(private http: HttpService) {
     }
 
 
 
     addContact(contact: Contact) {
-        return this.http.post(this.appUrl , contact,{headers: this.headers });
+        return this.http.postHttp(this.appUrl , contact);
     }
 
     updateContact(contact: Contact) {
-        return this.http.put(this.appUrl + '/' + contact.id , contact,{headers: this.headers });
+        return this.http.putHttp(this.appUrl + '/' + contact.id , contact);
     }
 
     deleteContact(id: number) {
-        return this.http.delete(this.appUrl + '/' + id ,{headers: this.headers });
+        return this.http.deleteHttp(this.appUrl + '/' + id );
     }
 }
