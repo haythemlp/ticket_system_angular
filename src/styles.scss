@@ -13,3 +13,39 @@
 @import "app/theme/styles/theme";
 @import "app/theme/styles/gradients";
 @import "app/theme/styles/rtl";
+
+.success{
+    
+      color: #fff !important;
+    background:#28a745 !important;
+}
+
+.primary{
+	    color: #fff !important;
+    background: #007bff !important;
+}
+
+.danger{
+	
+	    color: #fff !important;
+    background: #bd2130 !important;
+
+}
+
+.text-primary{
+    color: #707cd2!important;
+}
+.snackbar {
+    max-width: 90% !important;
+    margin-left: auto !important; // center align from left
+    margin-right: auto !important; // center align from right
+    margin-bottom: 1rem !important; 
+    padding: 10px !important; // spacing between the text and boundary
+    background-color: #0b8357;
+    color: #f7f0cf;
+
+    .mat-button-wrapper {
+        color: black !important; // action text color
+    }
+}
+

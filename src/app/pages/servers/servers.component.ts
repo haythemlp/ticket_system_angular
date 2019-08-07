@@ -56,7 +56,7 @@ export class ServersComponent implements OnInit {
 
 
         let dialogRef = this.dialog.open(ServersDialogComponent, {
-            data: server,
+            data: Object.assign({}, server),
 
             width: '80%',
         });

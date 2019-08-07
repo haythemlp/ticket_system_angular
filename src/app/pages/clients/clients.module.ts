@@ -7,10 +7,13 @@ import {SharedModule} from '../../shared/shared.module';
 import {PipesModule} from '../../theme/pipes/pipes.module';
 import {HttpClientModule} from '@angular/common/http';
 import { ClientDialogComponent } from './client-dialog/client-dialog.component';
+import { ChildComponent } from './child/child.component';
+import { ChildDialogComponent } from './child/child-dialog/child-dialog.component';
 
 
 export const routes = [
     {path: '', component: ClientsComponent, pathMatch: 'full'},
+     {path: ':id', component: ChildComponent, pathMatch: 'full'},
   
 ];
 
@@ -26,8 +29,8 @@ export const routes = [
         PipesModule
 
   ],
-  declarations: [ClientsComponent, ClientDialogComponent],
-       entryComponents: [ClientDialogComponent ]
+  declarations: [ClientsComponent, ClientDialogComponent, ChildComponent, ChildDialogComponent],
+       entryComponents: [ClientDialogComponent ,ChildDialogComponent]
 })
 
 

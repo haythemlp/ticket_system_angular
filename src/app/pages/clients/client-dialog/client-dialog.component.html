@@ -1,17 +1,14 @@
 <h1 mat-dialog-title><span *ngIf="!client.id">Add</span><span *ngIf="client.id">Edit</span> Client</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
-        <mat-tab-group class="vertical-tabs">
-            <mat-tab label="Basic">
-                <div fxLayout="column" class="form-field-outer">
+     <div fxLayout="column" class="form-field-outer">
                     <mat-grid-list cols="2" rowHeight="70px">
                        <mat-grid-tile >
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>person</mat-icon>
-                            Name
-                        </mat-placeholder>
-                        <input matInput formControlName="name" required>
+
+
+                  
+                        <input matInput placeholder="nom" formControlName="name" required>
                         <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
                         <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5
                             characters
@@ -22,115 +19,82 @@
                
                 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            URL
-                        </mat-placeholder>
-                        <input matInput formControlName="url" type="url">
-
+        
+                        <input matInput placeholder="Numero de contrat" formControlName="num_contrat" >
                     </mat-form-field>
                    </mat-grid-tile>
                   <mat-grid-tile >
 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            Company
-                        </mat-placeholder>
-                        <input matInput formControlName="company" type="url">
+                      
+                        <input matInput placeholder="NPA"  formControlName="npa">
 
                     </mat-form-field>
                         </mat-grid-tile>
                   <mat-grid-tile >
 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            CEO
-                        </mat-placeholder>
-                        <input matInput formControlName="ceo" type="url">
+                      
+                        <input matInput placeholder="Address" formControlName="address">
                     </mat-form-field>
                         </mat-grid-tile>
                   <mat-grid-tile >
 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            IP
-                        </mat-placeholder>
-                        <input matInput formControlName="ip" type="url">
+                   
+                        <input matInput placeholder="localite" formControlName="localite">
                     </mat-form-field>
                         </mat-grid-tile>
-                  <mat-grid-tile >
+                    <mat-grid-tile >
+                            <mat-form-field class="w-100 mr-2">
+                                <mat-select placeholder="Choose type" formControlName="type" name="type">
+                                    <mat-option *ngFor="let type of types" [value]="type">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="mx-3">{{type}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                     
+                    </mat-grid-tile>
+                         <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Numero des employes" formControlName="num_emp">
+                            </mat-form-field>
+                        </mat-grid-tile>
 
-                    <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            GIT token
-                        </mat-placeholder>
-                        <input matInput formControlName="git_token" type="url">
-                    </mat-form-field>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Numero de register de commerce" formControlName="nrc">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                              <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Phone" formControlName="mobile">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Tel" formControlName="tel">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                            <mat-grid-tile>
+
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput type="email" placeholder="Email" formControlName="email">
+                                <mat-error *ngIf="form.controls.email.hasError('email')">data should be email
+                                </mat-error>
+                            </mat-form-field>
                         </mat-grid-tile>
                 </mat-grid-list>
 
-                     <mat-slide-toggle formControlName="status" class="my-2">Active</mat-slide-toggle>
+                   
 
                   
                 </div>
-            </mat-tab>
-            <mat-tab label="SSH">
-                <div fxLayout="column" class="form-field-outer">
-                       <mat-grid-list cols="2" rowHeight="70px">
-                       <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Host" formControlName="ssh_host">
-                    </mat-form-field>
-                </mat-grid-tile>
-                 <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="User" formControlName="ssh_user">
-                    </mat-form-field>
-                      </mat-grid-tile>
-                 <mat-grid-tile >
-                  <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Pass" formControlName="ssh_pass">
-                    </mat-form-field>
-                      </mat-grid-tile>
-                 </mat-grid-list>
-
-                </div>
-            </mat-tab>
-
-          <mat-tab label="Database">
-                <div fxLayout="column" class="form-field-outer">
-                       <mat-grid-list cols="2" rowHeight="70px">
-                       <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Host" formControlName="url_host">
-                    </mat-form-field>
-                         </mat-grid-tile>
-                 <mat-grid-tile >
-                    <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="User" formControlName="db_user">
-                    </mat-form-field>
-                         </mat-grid-tile>
-                 <mat-grid-tile >
-                  <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Pass" formControlName="db_pass">
-                    </mat-form-field>
-                         </mat-grid-tile>
-                 <mat-grid-tile >
-
-                  <mat-form-field class="w-100 mr-2">
-                        <input matInput placeholder="Pass" formControlName="db_pass">
-                    </mat-form-field>
-                         </mat-grid-tile>
-                 </mat-grid-list>
-
-                </div>
-            </mat-tab>
-
-        </mat-tab-group>
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">

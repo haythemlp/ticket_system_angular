@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ClientsService} from'./clients.service';
 import {Client} from'./client';
-import {MatDialog, MatTableDataSource} from '@angular/material';
-
+import {MatDialog, MatTableDataSource,MatSnackBar} from '@angular/material';
 import {ClientDialogComponent} from './client-dialog/client-dialog.component';
 
 @Component({
@@ -18,7 +17,7 @@ export class ClientsComponent implements OnInit {
 
     public displayedColumns = ['name', 'num_contrat', 'address', 'email', 'actions'];
 
-  constructor(private clientsService:ClientsService,public dialog: MatDialog) { }
+  constructor(private clientsService:ClientsService,public dialog: MatDialog,public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -29,9 +28,6 @@ export class ClientsComponent implements OnInit {
 
 
    public getclients(): void {
-
-
-
    this.clientsService.getClients().subscribe(clients => {
             this.clients = clients;
            this.dataSource = new MatTableDataSource<Client>(this.clients);
@@ -39,30 +35,56 @@ export class ClientsComponent implements OnInit {
            
 
      });
-
-
-     
-
     }
 
        applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
-    public openServerDialog(client: Client) {
-
-
+    public openClientDialog(client: Client) {
         let dialogRef = this.dialog.open(ClientDialogComponent, {
-            data: client,
-
+            data: Object.assign({}, client),
             width: '80%',
         });
         dialogRef.afterClosed().subscribe(client => {
             if (client) {
-            //(server.id) ? this.updateServer(server) : this.addServer(server);
+            (client.id) ? this.updateClient(client) : this.addClient(client);
             }
         });
 
     }
+     public addClient(client: Client) {
+        this.clientsService.addClient(client).subscribe(client => {
+
+
+          this.getclients();
+
+           this.snackBar.open('ajouter avec succès', 'Close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+
+
+
+        });
+    }
+
+    public updateClient(client: Client) {
+        this.clientsService.updateClient(client).subscribe(client => {
+          this.getclients();
+           this.snackBar.open('mise à jour avec succès', 'Close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+
+
+
+        });
+    }
+
+    public deleteClient(client: Client) {
+        this.clientsService.deleteClient(client.id).subscribe(client => {
+          this.getclients();
+           this.snackBar.open('supprimé avec succès', 'close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+
+
+
+        });
+    }
+
 
 }

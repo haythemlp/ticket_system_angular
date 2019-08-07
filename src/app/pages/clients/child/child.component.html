@@ -1,0 +1,167 @@
+<app-content-header
+        [icon]="'check_box_outline_blank'"
+        [title]="client.name"
+        [desc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin ante lectus, id pretium mi dignissim non.'"
+        [hideBreadcrumb]="false"
+        [hasBgImage]="true"
+        [class]="'pb-4'"></app-content-header>
+
+<div fxLayout="row wrap" fxLayoutAlign="center" class="p-2">
+    <div fxFlex="100" class="p-2"  *ngIf="spiner">
+        <mat-card class="custom-card my-4">
+            <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                <mat-card-title class="my-2"><h2>DÉTAILS</h2></mat-card-title>
+  <button mat-icon-button  (click)="openClientDialog(client)"><mat-icon>more_vert</mat-icon></button>
+            </mat-card-header>
+            <mat-card-content>
+
+
+               
+              
+
+                	<mat-grid-list cols="3" rowHeight="50px">
+                     <mat-grid-tile>
+                       
+                        <small  class="text-primary ">numéro de contract </small>
+                      
+                        <p> {{client.num_contrat}} </p>
+                         </mat-grid-tile>
+
+
+                       <mat-grid-tile >
+               
+                     
+                        <small  class=" text-primary"> address  </small>
+                     
+                        <p> {{client.address}} </p>
+               
+                </mat-grid-tile>
+                 <mat-grid-tile>
+
+              
+                       
+                        <small  class="text-primary "> email </small>
+                      
+                        <p> {{client.email}}
+                        </p>
+                    </mat-grid-tile>
+                 <mat-grid-tile>
+              
+                        
+                        <small  class="text-primary "> localite </small>
+                      
+                        <p> {{client.localite}}  </p>
+                   
+               </mat-grid-tile>
+                 <mat-grid-tile>
+                       
+                        <small  class="text-primary "> Telephone </small>
+                      
+                        <p> {{client.tel}} </p>
+                   
+               </mat-grid-tile>
+                <mat-grid-tile>
+                       
+                        <small  class="text-primary "> mobile </small>
+                      
+                        <p> {{client.mobile}} </p>
+                   
+               </mat-grid-tile>
+                 <mat-grid-tile>
+                       
+                        <small  class="text-primary ">npa </small>
+                      
+                        <p> {{client.npa}} </p>
+                         </mat-grid-tile>
+
+                   <mat-grid-tile>
+                       
+                        <small  class="text-primary ">numéro de registre de commerce </small>
+                      
+                        <p> {{client.nrc}} </p>
+                         </mat-grid-tile>
+
+                   <mat-grid-tile>
+                       
+                        <small  class="text-primary ">Type d'entreprise </small>
+                      
+                        <p> {{client.type}} </p>
+                         </mat-grid-tile>
+
+                <mat-grid-tile>
+                       
+                        <small  class="text-primary ">Type d'entreprise </small>
+                      
+                        <p> {{client.num_emp}} </p>
+                         </mat-grid-tile>
+                 </mat-grid-list>  
+
+           
+            </mat-card-content>
+        </mat-card >
+
+    <mat-card class="custom-card my-4">
+            <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                <mat-card-title class="my-2"><h2>Contact</h2></mat-card-title>
+
+            </mat-card-header >
+  
+
+
+  
+
+            <mat-card-content class="p-2">
+           <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="fname">
+                <mat-header-cell *matHeaderCellDef> fname</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.fname}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lname">
+                <mat-header-cell *matHeaderCellDef> Numero contrat</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.lname}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="fonction">
+                <mat-header-cell *matHeaderCellDef> fonction</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.fonction}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> email</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.email}} </mat-cell>
+            </ng-container>
+
+                  <ng-container matColumnDef="tel">
+                <mat-header-cell *matHeaderCellDef> Telephone</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.tel}} </mat-cell>
+            </ng-container>
+
+                  <ng-container matColumnDef="mobile">
+                <mat-header-cell *matHeaderCellDef> mobile</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.mobile}} </mat-cell>
+            </ng-container>
+
+              <ng-container matColumnDef="birth_date">
+                <mat-header-cell *matHeaderCellDef> date de naissance</mat-header-cell>
+                <mat-cell *matCellDef="let contact"> {{contact.birth_date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+                <mat-cell *matCellDef="let contact">
+                   
+                    <button (click)="openContactDialog(contact)" mat-button color="accent" class="m-1"> <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="deleteContact(contact)" mat-button color="warn" class="m-1"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <button mat-fab color="primary" (click)="openContactDialog(null)" class="m-1"> <mat-icon>add</mat-icon></button>
+            </mat-card-content>
+    </mat-card>
+  </div>
+       <div *ngIf="!spiner" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+        <mat-spinner color="accent"></mat-spinner>    
+    </div>   
+</div>
+

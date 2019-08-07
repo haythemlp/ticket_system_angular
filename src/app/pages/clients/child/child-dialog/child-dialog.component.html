@@ -1,0 +1,89 @@
+<h1 mat-dialog-title><span *ngIf="!contact.id">Add</span><span *ngIf="contact.id">Edit</span> Contact</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">
+     <div fxLayout="column" class="form-field-outer">
+                    <mat-grid-list cols="2" rowHeight="70px">
+                       <mat-grid-tile >
+                    <mat-form-field class="w-100 mr-2">
+
+
+                  
+                        <input matInput placeholder="prenom" formControlName="fname" required>
+                        <mat-error *ngIf="form.controls.fname.errors?.required">Name is required</mat-error>
+                     
+                    </mat-form-field>
+                </mat-grid-tile>
+                  <mat-grid-tile >
+               
+                
+                    <mat-form-field class="w-100 mr-2">
+        
+                       <input matInput placeholder="nom" formControlName="lname" required>
+                        <mat-error *ngIf="form.controls.lname.errors?.required">Name is required</mat-error>
+                    </mat-form-field>
+                   </mat-grid-tile>
+
+                      <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput [matDatepicker]="picker1" placeholder="Choose a date"
+                                       formControlName="birth_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
+
+
+
+                    <mat-form-field class="w-100 mr-2">
+                      
+                        <input matInput placeholder="Email"  formControlName="email" type="email">
+                         <mat-error *ngIf="form.controls.email.hasError('email')">data should be email </mat-error>
+
+                    </mat-form-field>
+                        </mat-grid-tile>
+                  <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                      
+                        <input matInput placeholder="Fonction" formControlName="fonction">
+                    </mat-form-field>
+                        </mat-grid-tile>
+              
+
+                        
+
+                              <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Phone" formControlName="mobile">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Tel" formControlName="tel">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                          <mat-grid-tile>
+                            <mat-form-field class="w-100 mr-2">
+                                <input matInput placeholder="Tel" formControlName="tel">
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                            
+
+                           
+                </mat-grid-list>
+
+                   
+
+                  
+                </div>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
+            *ngIf="!contact.id">Save</span><span *ngIf="contact.id">Update</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

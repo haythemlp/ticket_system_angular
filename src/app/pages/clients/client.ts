@@ -12,5 +12,23 @@ export class Client {
            email:string;
              tel:string;
                mobile:string;
+
+               contacts:Contact[];
             
+}
+
+
+export class Contact  {
+
+  id:number;
+  fname:string;
+  lname:string;
+  fonction:string;
+  email:string;
+  tel:string;
+  mobile:string;
+  client_id:number;
+  birth_date:Date;
+  
+  
 }
