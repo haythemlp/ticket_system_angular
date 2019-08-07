@@ -1,43 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import {ClientsService} from'./clients.service';
-import {Client} from'./client';
-import {MatDialog, MatTableDataSource,MatSnackBar} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {ClientsService} from './clients.service';
+import {Client} from './client';
+import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {ClientDialogComponent} from './client-dialog/client-dialog.component';
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+    selector: 'app-clients',
+    templateUrl: './clients.component.html',
+    styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
 
-	public clients:Client[];
-	public dataSource: any;
-    public spiner:boolean =false;
+    public clients: Client[];
+    public dataSource: any;
+    public spiner: boolean = false;
 
     public displayedColumns = ['name', 'num_contrat', 'address', 'email', 'actions'];
 
-  constructor(private clientsService:ClientsService,public dialog: MatDialog,public snackBar: MatSnackBar) { }
-
-  ngOnInit() {
-
-         this.getclients();
-
-
-  }
-
-
-   public getclients(): void {
-   this.clientsService.getClients().subscribe(clients => {
-            this.clients = clients;
-           this.dataSource = new MatTableDataSource<Client>(this.clients);
-           this.spiner=true;
-           
-
-     });
+    constructor(private clientsService: ClientsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     }
 
-       applyFilter(filterValue: string) {
+    ngOnInit() {
+
+        this.getclients();
+
+
+    }
+
+
+    public getclients(): void {
+        this.clientsService.getClients().subscribe(clients => {
+            this.clients = clients;
+            this.dataSource = new MatTableDataSource<Client>(this.clients);
+            this.spiner = true;
+
+
+        });
+    }
+
+    applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
@@ -48,42 +49,76 @@ export class ClientsComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(client => {
             if (client) {
-            (client.id) ? this.updateClient(client) : this.addClient(client);
+                (client.id) ? this.updateClient(client) : this.addClient(client);
             }
         });
 
     }
-     public addClient(client: Client) {
+
+    public addClient(client: Client) {
         this.clientsService.addClient(client).subscribe(client => {
 
 
-          this.getclients();
+            this.getclients();
 
-           this.snackBar.open('ajouter avec succès', 'Close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+            this.snackBar.open('ajouter avec succès', 'Close', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'success']
+            });
 
 
+        }, error =>
 
-        });
+            this.snackBar.open(error.error.message, 'X', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'danger']
+            }));
     }
 
     public updateClient(client: Client) {
         this.clientsService.updateClient(client).subscribe(client => {
-          this.getclients();
-           this.snackBar.open('mise à jour avec succès', 'Close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+            this.getclients();
+            this.snackBar.open('mise à jour avec succès', 'Close', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'success']
+            });
 
 
+        }, error =>
 
-        });
+            this.snackBar.open(error.error.message, 'X', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'danger']
+            }));
     }
 
     public deleteClient(client: Client) {
         this.clientsService.deleteClient(client.id).subscribe(client => {
-          this.getclients();
-           this.snackBar.open('supprimé avec succès', 'close', { duration: 2000,verticalPosition: 'top', horizontalPosition: 'end',panelClass: ['snackbar','success']});
+            this.getclients();
+            this.snackBar.open('supprimé avec succès', 'close', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'success']
+            });
 
 
+        }, error =>
 
-        });
+            this.snackBar.open(error.error.message, 'X', {
+                duration: 2000,
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                panelClass: ['snackbar', 'danger']
+            }));
     }
 
 

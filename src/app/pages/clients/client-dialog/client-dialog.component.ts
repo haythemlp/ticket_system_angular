@@ -1,18 +1,17 @@
-import { Component,Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {Client,Contact} from "../client";
+import {Client} from "../client";
 
 @Component({
-  selector: 'app-client-dialog',
-  templateUrl: './client-dialog.component.html',
-  styleUrls: ['./client-dialog.component.scss']
+    selector: 'app-client-dialog',
+    templateUrl: './client-dialog.component.html',
+    styleUrls: ['./client-dialog.component.scss']
 })
 export class ClientDialogComponent implements OnInit {
     public form: FormGroup;
 
-    public types=["petit","moyen","grand"];
-
+    public types = ["petit", "moyen", "grand"];
 
 
     constructor(public dialogRef: MatDialogRef<ClientDialogComponent>,
@@ -21,17 +20,17 @@ export class ClientDialogComponent implements OnInit {
         this.form = this.fb.group({
             id: null,
             name: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-            num_contrat:null,
-            npa:null,
-            address:null,
-            localite:null,
-            type:null,
-            num_emp:null,
-            nrc:null,
-            email:null,
-            tel:null,
-            mobile:null,
-            
+            num_contrat: null,
+            npa: null,
+            address: null,
+            localite: null,
+            type: null,
+            num_emp: null,
+            nrc: null,
+            email: null,
+            tel: null,
+            mobile: null,
+
 
         });
     }

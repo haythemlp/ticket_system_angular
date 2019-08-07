@@ -19,7 +19,6 @@ export class ServersService {
 
     public getSevers(): Observable<Server[]> {
 
-
         return this.http.get<Server[]>(this.appUrl + '?token=' + this.token);
 
     }
