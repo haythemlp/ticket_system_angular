@@ -69,14 +69,7 @@ export class ClientsComponent implements OnInit {
             });
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
     public updateClient(client: Client) {
@@ -90,14 +83,7 @@ export class ClientsComponent implements OnInit {
             });
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
     public deleteClient(client: Client) {
@@ -111,14 +97,7 @@ export class ClientsComponent implements OnInit {
             });
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
 

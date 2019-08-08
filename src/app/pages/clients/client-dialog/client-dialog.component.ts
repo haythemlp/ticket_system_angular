@@ -30,9 +30,7 @@ export class ClientDialogComponent implements OnInit {
             email: null,
             tel: null,
             mobile: null,
-
-
-        });
+   });
     }
 
     ngOnInit() {

@@ -44,6 +44,19 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile>
+                       
+                                <mat-form-field class="w-100 mr-2">
+                                    <mat-select placeholder="Choose role" formControlName="role_id" name="role">
+                                        <mat-option *ngFor="let role of roles" [value]="role.id">
+                                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                                <span class="mx-3">{{role.name}}</span>
+                                            </div>
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                   </mat-grid-tile>
+                   <mat-grid-tile>
 
                             <mat-slide-toggle formControlName="is_active" class="my-2">Active</mat-slide-toggle>
                         </mat-grid-tile>

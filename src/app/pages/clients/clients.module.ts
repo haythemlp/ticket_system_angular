@@ -13,8 +13,8 @@ import { ChildDialogComponent } from './child/child-dialog/child-dialog.componen
 
 export const routes = [
     {path: '', component: ClientsComponent, pathMatch: 'full'},
-     {path: ':id', component: ChildComponent, pathMatch: 'full'},
-  
+    {path: ':id', component: ChildComponent, pathMatch: 'full'},
+
 ];
 
 

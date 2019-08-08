@@ -5,7 +5,8 @@ import {Settings} from '../../app.settings.model';
 import {User} from './user.model';
 import {UsersService} from './users.service';
 import {UserDialogComponent} from './user-dialog/user-dialog.component';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from '../../../environments/environment.prod';
+import {Roles} from '../roles/roles';
 
 @Component({
     selector: 'app-users',
@@ -17,6 +18,7 @@ import {environment} from "../../../environments/environment.prod";
 export class UsersComponent implements OnInit {
     public mediaUrl = environment.mediaUrl;
     public users: User[];
+    public roles: Roles[];
     public searchText: string;
     public page: any;
     public settings: Settings;
@@ -38,8 +40,9 @@ export class UsersComponent implements OnInit {
     public getUsers(): void {
 
         this.users = null; //for show spinner each time
-        this.usersService.getUsers().subscribe(users => {
-            this.users = users;
+        this.usersService.getUsers().subscribe(res => {
+            this.users = res.users;
+            this.roles = res.roles;
         });
 
 
@@ -71,8 +74,12 @@ export class UsersComponent implements OnInit {
     public openUserDialog(user: User) {
 
 
+
+        let data = {user: user ? Object.assign({}, user) : new User(), roles:  this.roles};
+
+
         let dialogRef = this.dialog.open(UserDialogComponent, {
-            data: Object.assign({}, user),
+            data: data,
 
             width: '80%',
         });

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../user.model';
+import {Roles} from '../../roles/roles';
 
 @Component({
     selector: 'app-user-dialog',
@@ -10,18 +11,19 @@ import {User} from '../user.model';
 })
 export class UserDialogComponent implements OnInit {
 
-    @ViewChild("fileInput") fileInput;
+    @ViewChild('fileInput') fileInput;
     public civils = ['Monsieur', 'Madame'];
     public fonctions = ['web developer', 'ceo', 'secretaire'];
     public comps = ['php', 'mysql', 'java'];
+    public roles :Roles[];
 
-
+    public user: User;
     public form: FormGroup;
     public passwordHide: boolean = true;
 
 
     constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public user: User,
+                @Inject(MAT_DIALOG_DATA) public data,
                 public fb: FormBuilder) {
         this.form = this.fb.group({
             id: null,
@@ -30,6 +32,7 @@ export class UserDialogComponent implements OnInit {
             firstname: null,
             lastname: null,
             email: [null, Validators.compose([Validators.required, Validators.email])],
+            role_id: [null, Validators.compose([Validators.required])],
             is_active: false,
             civilite: null,
             fonction: null,
@@ -43,10 +46,13 @@ export class UserDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.user = this.data.user;
+        this.roles = this.data.roles;
+        console.log(this.roles);
         if (this.user) {
-            console.log(this.user);
+          
 
-            this.user.competance = JSON.parse(this.user.competance);
+            this.user.competance =this.user.competance ? JSON.parse(this.user.competance): [];
             this.form.patchValue(this.user);
 
 

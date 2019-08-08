@@ -7,6 +7,7 @@ export class User {
     password: string;
     avatar:string;
     competance:string;
+    role_id:number;
 }
 
 /*
