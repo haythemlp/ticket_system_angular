@@ -26,9 +26,12 @@ console.log(menu.id);
 
         const listMenu = JSON.parse(this.user.role.menu);
 
-        let a = listMenu.indexOf(+menu.id)!=-1;
+       if ( listMenu.indexOf(+menu.id)==-1) {
 
-        console.log(a);
+       this.router.navigate(['/']);
+       return false
+      
+       }
 
 
 
