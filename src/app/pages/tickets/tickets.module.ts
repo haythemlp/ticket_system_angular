@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {TicketsComponent} from './tickets.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {QuillModule} from 'ngx-quill';
 import {SharedModule} from '../../shared/shared.module';
 import {PipesModule} from '../../theme/pipes/pipes.module';
-import {MailboxComponent} from './mailbox.component';
+
 
 export const routes = [
-    {path: '', component: MailboxComponent, pathMatch: 'full'}
+    {path: '', component: TicketsComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -23,9 +24,7 @@ export const routes = [
         SharedModule,
         PipesModule
     ],
-    declarations: [
-        MailboxComponent
-    ]
+    declarations: [TicketsComponent]
 })
-export class MailboxModule {
+export class TicketsModule {
 }

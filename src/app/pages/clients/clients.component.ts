@@ -3,6 +3,9 @@ import {ClientsService} from './clients.service';
 import {Client} from './client';
 import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {ClientDialogComponent} from './client-dialog/client-dialog.component';
+import {ConfirmationComponent} from '../../shared/confirmation/confirmation.component';
+import {SnackbarService} from '../../services/snackbar.service';
+
 
 @Component({
     selector: 'app-clients',
@@ -17,7 +20,7 @@ export class ClientsComponent implements OnInit {
 
     public displayedColumns = ['name', 'num_contrat', 'address', 'email', 'actions'];
 
-    constructor(private clientsService: ClientsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
+    constructor(private clientsService: ClientsService, public dialog: MatDialog, public snackBar: SnackbarService) {
     }
 
     ngOnInit() {
@@ -56,48 +59,43 @@ export class ClientsComponent implements OnInit {
     }
 
     public addClient(client: Client) {
-        this.clientsService.addClient(client).subscribe(client => {
+        this.clientsService.addClient(client).subscribe(() => {
 
 
             this.getclients();
 
-            this.snackBar.open('ajouter avec succès', 'Close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+            this.snackBar.open('ajouter avec succès', 'success');
 
 
         });
     }
 
     public updateClient(client: Client) {
-        this.clientsService.updateClient(client).subscribe(client => {
+        this.clientsService.updateClient(client).subscribe(() => {
             this.getclients();
-            this.snackBar.open('mise à jour avec succès', 'Close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+            this.snackBar.open('mise à jour avec succès', 'success');
 
 
         });
     }
 
     public deleteClient(client: Client) {
-        this.clientsService.deleteClient(client.id).subscribe(client => {
-            this.getclients();
-            this.snackBar.open('supprimé avec succès', 'close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
 
 
+        const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '350px',
+            data: 'Do you confirm the deletion of this data?'
         });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.clientsService.deleteClient(client.id).subscribe(() => {
+                    this.getclients();
+                    this.snackBar.open('supprimé avec succès', 'success');
+                });
+            }
+        });
+
+
     }
 
 

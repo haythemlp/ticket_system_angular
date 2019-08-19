@@ -35,6 +35,7 @@ import { MatAutocompleteModule,
          MatStepperModule } from '@angular/material';
 import { ContentHeaderComponent } from './content-header/content-header.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   imports: [
@@ -73,6 +74,10 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     MatTooltipModule,
     MatStepperModule
   ],
+entryComponents: [
+    ConfirmationComponent
+  ],
+  
   exports: [
     FlexLayoutModule,
     MatAutocompleteModule,
@@ -111,7 +116,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   declarations: [
     ContentHeaderComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ConfirmationComponent
   ]
 })
 export class SharedModule { }

@@ -18,7 +18,7 @@ export class ServersService {
     }
 
 
-    public getSevers(): Observable<Server[]> {
+    public getSevers(): Observable<any> {
 
         return this.httpService.getHttp(this.appUrl);
 

@@ -20,8 +20,8 @@ export class DynamicMenuService {
             menuItem['icon'],
             menuItem['target'],
             menuItem['hasSubMenu'],
-            parseInt(menuItem['parentId']),
-            []);
+            parseInt(menuItem['parentId'])
+           );
 
         menuItems.push(newMenuItem);
         let item = menuItems.filter(item => item.id == newMenuItem.parentId)[0];

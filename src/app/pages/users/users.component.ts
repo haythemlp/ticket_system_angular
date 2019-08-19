@@ -7,6 +7,8 @@ import {UsersService} from './users.service';
 import {UserDialogComponent} from './user-dialog/user-dialog.component';
 import {environment} from '../../../environments/environment.prod';
 import {Roles} from '../roles/roles';
+import {ConfirmationComponent} from '../../shared/confirmation/confirmation.component';
+import {SnackbarService} from '../../services/snackbar.service';
 
 @Component({
     selector: 'app-users',
@@ -27,6 +29,7 @@ export class UsersComponent implements OnInit {
 
     constructor(public appSettings: AppSettings,
                 public dialog: MatDialog,
+                public snackBar: SnackbarService,
                 public usersService: UsersService) {
         this.settings = this.appSettings.settings;
     }
@@ -49,16 +52,43 @@ export class UsersComponent implements OnInit {
     }
 
     public addUser(user: User) {
-        this.usersService.addUser(user).subscribe(user => this.getUsers());
+        this.usersService.addUser(user).subscribe(user => {
+            this.getUsers();
+            this.snackBar.open('ajouter avec succès', 'success');
+        });
     }
 
     public updateUser(user: User) {
-        this.usersService.updateUser(user).subscribe(user => this.getUsers());
+        this.usersService.updateUser(user).subscribe(user => {
+            this.getUsers();
+
+            this.snackBar.open('mise a jour avec succès', 'success');
+        });
     }
 
     public deleteUser(user: User) {
-        this.usersService.deleteUser(user.id).subscribe(user => this.getUsers());
+
+        const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '350px',
+            data: 'Do you confirm the deletion of this data?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                console.log('Yes clicked');
+                // DO SOMETHING
+
+                this.usersService.deleteUser(user.id).subscribe(user => {
+                    this.getUsers();
+
+                    this.snackBar.open('supprimé avec succès', 'success');
+
+                });
+            }
+        });
+
+
     }
+
 
     public changeView(viewType) {
         this.viewType = viewType;
@@ -74,8 +104,7 @@ export class UsersComponent implements OnInit {
     public openUserDialog(user: User) {
 
 
-
-        let data = {user: user ? Object.assign({}, user) : new User(), roles:  this.roles};
+        let data = {user: user ? Object.assign({}, user) : new User(), roles: this.roles};
 
 
         let dialogRef = this.dialog.open(UserDialogComponent, {

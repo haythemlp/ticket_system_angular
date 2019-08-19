@@ -5,13 +5,26 @@
             <mat-tab label="Basic">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-grid-list cols="2" rowHeight="70px">
+
+                         <mat-grid-tile >
+
+                    <mat-form-field class="w-100 mr-2">
+                       
+<mat-select placeholder="Choose type" formControlName="client_id" name="client">
+                                    <mat-option *ngFor="let client of clients" [value]="client.id">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="mx-3">{{client.name}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+
+                        
+
+                    </mat-form-field>
+                        </mat-grid-tile>
                        <mat-grid-tile >
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>person</mat-icon>
-                            Name
-                        </mat-placeholder>
-                        <input matInput formControlName="name" required>
+                        <input matInput formControlName="name" placeholder="Name" required>
                         <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
                         <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5
                             characters
@@ -22,53 +35,23 @@
                
                 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            URL
-                        </mat-placeholder>
-                        <input matInput formControlName="url" type="url">
+                
+                        <input matInput placeholder="URL" formControlName="url" type="url">
 
                     </mat-form-field>
                    </mat-grid-tile>
+                
                   <mat-grid-tile >
 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            Company
-                        </mat-placeholder>
-                        <input matInput formControlName="company" type="url">
-
+                       
+                        <input matInput placeholder="IP" formControlName="ip" type="url">
                     </mat-form-field>
                         </mat-grid-tile>
                   <mat-grid-tile >
 
                     <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            CEO
-                        </mat-placeholder>
-                        <input matInput formControlName="ceo" type="url">
-                    </mat-form-field>
-                        </mat-grid-tile>
-                  <mat-grid-tile >
-
-                    <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            IP
-                        </mat-placeholder>
-                        <input matInput formControlName="ip" type="url">
-                    </mat-form-field>
-                        </mat-grid-tile>
-                  <mat-grid-tile >
-
-                    <mat-form-field class="w-100 mr-2">
-                        <mat-placeholder>
-                            <mat-icon>vpn_key</mat-icon>
-                            GIT token
-                        </mat-placeholder>
-                        <input matInput formControlName="git_token" type="url">
+                        <input matInput placeholder="GIT token" formControlName="git_token" type="url">
                     </mat-form-field>
                         </mat-grid-tile>
                 </mat-grid-list>

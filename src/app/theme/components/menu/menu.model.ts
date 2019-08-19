@@ -6,8 +6,8 @@ export class Menu {
                 public icon: string,
                 public target: string,
                 public hasSubMenu: boolean,
-                public parentId: number,
-                public role: string[]) {
+                public parentId: number
+              ) {
     }
 
 } 

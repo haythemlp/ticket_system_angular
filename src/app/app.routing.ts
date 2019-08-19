@@ -19,8 +19,13 @@ export const routes: Routes = [
             {path: 'servers', loadChildren: './pages/servers/servers.module#ServersModule', data: {breadcrumb: 'Servers'}},
             {path: 'roles', loadChildren: './pages/roles/roles.module#RolesModule', data: {breadcrumb: 'Roles'}},
             {path: 'clients', loadChildren: './pages/clients/clients.module#ClientsModule', data: {breadcrumb: 'Clients'}},
-            {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'} },
-           { path: 'dynamic-menu',loadChildren: './pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule',  data: {breadcrumb: 'Dynamic Menu'} },
+            {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},
+            {path: 'tickets', loadChildren: './pages/tickets/tickets.module#TicketsModule', data: {breadcrumb: 'Tickets'}},
+            {
+                path: 'dynamic-menu',
+                loadChildren: './pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule',
+                data: {breadcrumb: 'Dynamic Menu'}
+            },
             {path: 'ui', loadChildren: './pages/ui/ui.module#UiModule', data: {breadcrumb: 'UI'}},
             {path: 'mailbox', loadChildren: './pages/mailbox/mailbox.module#MailboxModule', data: {breadcrumb: 'Mailbox'}},
             {path: 'chat', loadChildren: './pages/chat/chat.module#ChatModule', data: {breadcrumb: 'Chat'}},
@@ -38,7 +43,7 @@ export const routes: Routes = [
             {path: 'blank', component: BlankComponent, data: {breadcrumb: 'Blank page'}},
             {path: 'search', component: SearchComponent, data: {breadcrumb: 'Search'}},
             {path: 'search/:name', component: SearchComponent, data: {breadcrumb: 'Search'}}
-        ], canActivate: [AuthGuard], canActivateChild : [RoleGuard]
+        ], canActivate: [AuthGuard], canActivateChild: [RoleGuard]
     },
     {path: 'landing', loadChildren: './pages/landing/landing.module#LandingModule'},
     {path: 'login', canActivate: [GuestGuard], loadChildren: './pages/login/login.module#LoginModule'},

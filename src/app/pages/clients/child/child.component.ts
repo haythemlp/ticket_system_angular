@@ -7,6 +7,7 @@ import {ContactsService} from './contacts.service';
 import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {ChildDialogComponent} from './child-dialog/child-dialog.component';
 import {ClientDialogComponent} from '../client-dialog/client-dialog.component';
+import {ConfirmationComponent} from '../../../shared/confirmation/confirmation.component';
 
 @Component({
     selector: 'app-child',
@@ -86,86 +87,49 @@ export class ChildComponent implements OnInit {
 
             this.getClient();
 
-            this.snackBar.open('ajouter avec succès', 'Close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+            this.snackBar.open('ajouter avec succès', 'success');
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
 
     public updateClient(client: Client) {
         this.clientsService.updateClient(client).subscribe(client => {
             this.getClient();
-            this.snackBar.open('mise à jour avec succès', 'Close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+            this.snackBar.open('mise à jour avec succès', 'success');
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
     public updateContact(contact: Contact) {
         this.contactstsService.updateContact(contact).subscribe(contact => {
             this.getClient();
-            this.snackBar.open('mise à jour avec succès', 'Close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+            this.snackBar.open('mise à jour avec succès', 'success');
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
+        });
     }
 
     public deleteContact(contact: Contact) {
-        this.contactstsService.deleteContact(contact.id).subscribe(contact => {
-            this.getClient();
-            this.snackBar.open('supprimé avec succès', 'close', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'success']
-            });
+
+        const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '350px',
+            data: 'Do you confirm the deletion of this data?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                console.log('Yes clicked');
+                // DO SOMETHING
+                this.contactstsService.deleteContact(contact.id).subscribe(contact => {
+                    this.getClient();
+                    this.snackBar.open('supprimé avec succès', 'success');
+                });
+            }
+        });
 
 
-        }, error =>
-
-            this.snackBar.open(error.error.message, 'X', {
-                duration: 2000,
-                verticalPosition: 'top',
-                horizontalPosition: 'end',
-                panelClass: ['snackbar', 'danger']
-            }));
     }
 
 

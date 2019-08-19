@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {Server} from "../server";
+import {Client} from'../../clients/client';
 
 
 @Component({
@@ -11,16 +12,17 @@ import {Server} from "../server";
 })
 export class ServersDialogComponent implements OnInit {
     public form: FormGroup;
+    public clients:Client[];
+    public server :Server;
 
     constructor(public dialogRef: MatDialogRef<ServersDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public server: Server,
+                @Inject(MAT_DIALOG_DATA) public data,
                 public fb: FormBuilder) {
         this.form = this.fb.group({
             id: null,
             name: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
             url: null,
-            company: null,
-            ceo: null,
+            client_id: [null,Validators.required],
             ip: null,
             git_token: null,
             ssh_host: null,
@@ -38,6 +40,10 @@ export class ServersDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+
+this.server=this.data.server;
+this.clients=this.data.clients;
+
         if (this.server) {
 
             this.form.patchValue(this.server);

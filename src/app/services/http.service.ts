@@ -18,7 +18,7 @@ export class HttpService {
 
         return this.http.get<any>(url, {headers: this.getToken()})
             .pipe(
-               retry(3),
+               retry(1),
                 catchError(err => {
                   console.log(err.error);
                     this.snackBar.open(err.error.message, 'X', {
@@ -37,7 +37,7 @@ export class HttpService {
 
         return this.http.post<any>(url, body, {headers: this.getToken()})
             .pipe(
-               retry(3),
+               retry(1),
                 catchError(err => {
                   console.log(err.error);
                     this.snackBar.open(err.error.message, 'X', {
@@ -57,7 +57,7 @@ export class HttpService {
 
         return this.http.put<any>(url, body, {headers: this.getToken()})
             .pipe(
-               retry(3),
+               retry(1),
                 catchError(err => {
                   console.log(err.error);
                     this.snackBar.open(err.error.message, 'X', {
@@ -77,7 +77,7 @@ export class HttpService {
 
         return this.http.delete<any>(url, {headers: this.getToken()})
             .pipe(
-               retry(3),
+               retry(1),
                 catchError(err => {
                   console.log(err.error);
                     this.snackBar.open(err.error.message, 'X', {
