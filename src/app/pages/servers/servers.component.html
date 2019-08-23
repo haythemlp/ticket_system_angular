@@ -15,7 +15,7 @@
             <mat-icon>search</mat-icon>
         </button>
     </div>
-    <form class="server-search" [class.show]="showSearch">
+    <form class="search" [class.show]="showSearch">
         <mat-form-field class="px-3 py-1">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
         </mat-form-field>

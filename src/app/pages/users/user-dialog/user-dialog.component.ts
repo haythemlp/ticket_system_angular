@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../user.model';
 import {Roles} from '../../roles/roles';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-user-dialog',
@@ -46,6 +47,13 @@ export class UserDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+     
+$(document).ready(function(){
+
+   console.log($('.dropify')) ;
+  $('.dropify').dropify();
+});
+
         this.user = this.data.user;
         this.roles = this.data.roles;
         console.log(this.roles);

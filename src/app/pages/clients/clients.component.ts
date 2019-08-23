@@ -17,6 +17,7 @@ export class ClientsComponent implements OnInit {
     public clients: Client[];
     public dataSource: any;
     public spiner: boolean = false;
+    public showSearch: boolean = false;
 
     public displayedColumns = ['name', 'num_contrat', 'address', 'email', 'actions'];
 

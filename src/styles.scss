@@ -6,7 +6,8 @@
 // indigo-pink, deeppurple-amber, purple-green and pink-bluegrey.
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
 @import "app/theme/styles/base";
 @import "app/theme/styles/spaces";
 @import "app/theme/styles/libs-override";
@@ -49,3 +50,42 @@
     }
 }
 
+.vertical-tabs.mat-tab-group {
+  .mat-tab-body-wrapper {
+
+    padding: 0 16px;
+    width: 100%;
+  }
+
+}
+
+.search {
+  width: 0;
+  overflow: hidden;
+  transition: 0.3s;
+  font-size: 14px;
+
+  .mat-form-field {
+    width: 100% !important;
+    text-align: center !important;
+    height: 36px;
+  }
+
+  .mat-form-field-infix {
+    padding: 5px;
+    width: 100px;
+  }
+
+  .mat-input-element {
+    text-align: center;
+  }
+
+  &.show {
+    width: 100%;
+    overflow: visible;
+  }
+}
+.user-spinner{
+    position: absolute;
+    top:0; right: 0; bottom: 0; left:0;
+}

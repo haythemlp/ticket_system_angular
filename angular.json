@@ -50,9 +50,14 @@
               "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/dragula/dist/dragula.min.css",
-              "src/styles.scss"
+              "node_modules/dropify/dist/css/dropify.min.css",
+              "src/styles.scss",
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/dropify/dist/js/dropify.min.js"
+            ]
           },
           "configurations": {
             "production": {

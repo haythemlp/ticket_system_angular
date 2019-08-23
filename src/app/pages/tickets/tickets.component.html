@@ -61,7 +61,7 @@
 </mat-toolbar>
 
 <div fxLayout="row wrap">
-  <div fxFlex="100">
+  <div fxFlex="100" *ngIf="spiner">
     <mat-card class="p-0 mailbox">
       <mat-drawer-container class="mailbox-container">
         <mat-drawer #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="mailbox-sidenav mat-elevation-z1" autoFocus="false">
@@ -238,5 +238,8 @@
         </div>
       </mat-drawer-container>
     </mat-card>
+  </div>
+   <div *ngIf="!spiner" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="accent"></mat-spinner>
   </div>
 </div>

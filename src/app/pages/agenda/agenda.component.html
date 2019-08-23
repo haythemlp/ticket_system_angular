@@ -1,0 +1,36 @@
+<app-content-header
+        [icon]="'check_box_outline_blank'"
+        [title]="'Page title'"
+        [desc]=""
+        [hideBreadcrumb]="false"
+        [hasBgImage]="true"
+        [class]="'pb-4'"></app-content-header>
+
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" class="px-2 user-toolbar">
+    <div fxLayout="row">
+
+        <button mat-icon-button (click)="openDialog(null)">
+            <mat-icon>add</mat-icon>
+        </button>
+
+    </div>
+
+    <div fxLayout="row">
+
+    </div>
+</mat-toolbar>
+
+<div fxLayout="row wrap" fxLayoutAlign="center" class="p-2">
+    <div fxFlex="100" class="p-5">
+        <full-calendar [selectable]="true"
+                       [editable]="true"
+                       deepChangeDetection="true"
+                       (eventClick)="handleDateClick($event)"
+                       [header]="header"
+                       [draggable]="true"
+                       defaultView="dayGridMonth"
+                       
+                       [events]="calendarEvents"
+                       [plugins]="calendarPlugins"></full-calendar>
+    </div>
+</div>

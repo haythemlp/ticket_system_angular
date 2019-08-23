@@ -20,6 +20,7 @@ export const routes: Routes = [
             {path: 'roles', loadChildren: './pages/roles/roles.module#RolesModule', data: {breadcrumb: 'Roles'}},
             {path: 'clients', loadChildren: './pages/clients/clients.module#ClientsModule', data: {breadcrumb: 'Clients'}},
             {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},
+            {path: 'agenda', loadChildren: './pages/agenda/agenda.module#AgendaModule', data: {breadcrumb: 'Agenda'}},
             {path: 'tickets', loadChildren: './pages/tickets/tickets.module#TicketsModule', data: {breadcrumb: 'Tickets'}},
             {
                 path: 'dynamic-menu',

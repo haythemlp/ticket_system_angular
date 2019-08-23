@@ -7,10 +7,16 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {QuillModule} from 'ngx-quill';
 import {SharedModule} from '../../shared/shared.module';
 import {PipesModule} from '../../theme/pipes/pipes.module';
+import { QuestionsComponent } from './questions/questions.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { DialogQuestionComponent } from './questions/dialog-question/dialog-question.component';
+import { DialogCategoryComponent } from './categories/dialog-category/dialog-category.component';
 
 
 export const routes = [
-    {path: '', component: TicketsComponent, pathMatch: 'full'}
+    {path: 'list', component: TicketsComponent, pathMatch: 'full',data: { breadcrumb: 'Liste' }},
+    {path: 'questions', component: QuestionsComponent, pathMatch: 'full', data: { breadcrumb: 'Questions' }},
+    {path: 'categories', component: CategoriesComponent, pathMatch: 'full', data: { breadcrumb: 'Categories' }},
 ];
 
 @NgModule({
@@ -24,7 +30,8 @@ export const routes = [
         SharedModule,
         PipesModule
     ],
-    declarations: [TicketsComponent]
+    declarations: [TicketsComponent, QuestionsComponent, CategoriesComponent, DialogQuestionComponent, DialogCategoryComponent],
+     entryComponents:[DialogQuestionComponent,DialogCategoryComponent]
 })
 export class TicketsModule {
 }

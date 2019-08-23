@@ -37,6 +37,7 @@ export class TicketsComponent implements OnInit {
   public ticket: Ticket;
   public newTicket: boolean;
   public replyTicket: boolean;
+     public spiner: boolean = false;
  
   public showSearch:boolean = false;
   public searchText: string;
@@ -98,6 +99,7 @@ public getTickets(){
           this.types=data.types;
           for (var i = 0; i < this.questions.length; ++i) {
  this.addItems();
+ this.spiner= true;
 }
 
 
