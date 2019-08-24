@@ -1,0 +1,36 @@
+<h1 mat-dialog-title><span *ngIf="!event.id">Add</span><span *ngIf="event.id">Edit</span> Event</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">
+
+        <mat-form-field class="w-100 mr-2">
+            <input matInput placeholder="Title" formControlName="title" required>
+            <mat-error *ngIf="form.controls.title.errors?.required">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mr-2">
+            <mat-select placeholder="Choose type" formControlName="color" name="type">
+                <mat-option *ngFor="let type of types" [value]="type.value">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <span class="mx-3">{{type.text}}</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mr-2">
+            <input matInput [owlDateTimeTrigger]="dt" [owlDateTime]="dt" placeholder="date start"  formControlName="start">
+            <owl-date-time #dt ></owl-date-time>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mr-2">
+            <input matInput [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="date end"  formControlName="end">
+            <owl-date-time #dt2 ></owl-date-time>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
+            *ngIf="!event.id">Save</span><span *ngIf="event.id">Update</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

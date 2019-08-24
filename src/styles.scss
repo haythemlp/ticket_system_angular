@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://cdn.quilljs.com/1.2.2/quill.snow.css');
 @import url('https://cdn.quilljs.com/1.2.2/quill.bubble.css');
-
 // indigo-pink, deeppurple-amber, purple-green and pink-bluegrey.
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';

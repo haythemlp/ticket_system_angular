@@ -24,7 +24,7 @@ export class ChildComponent implements OnInit {
 
 
     constructor(private clientsService: ClientsService,
-                private contactstsService: ContactsService,
+                private contactsService: ContactsService,
                 private route: ActivatedRoute,
                 public dialog: MatDialog,
                 public snackBar: MatSnackBar
@@ -82,7 +82,7 @@ export class ChildComponent implements OnInit {
 
 
     public addContact(contact: Contact) {
-        this.contactstsService.addContact(contact).subscribe(contact => {
+        this.contactsService.addContact(contact).subscribe(contact => {
 
 
             this.getClient();
@@ -104,7 +104,7 @@ export class ChildComponent implements OnInit {
     }
 
     public updateContact(contact: Contact) {
-        this.contactstsService.updateContact(contact).subscribe(contact => {
+        this.contactsService.updateContact(contact).subscribe(contact => {
             this.getClient();
             this.snackBar.open('mise à jour avec succès', 'success');
 
@@ -122,7 +122,7 @@ export class ChildComponent implements OnInit {
             if (result) {
                 console.log('Yes clicked');
                 // DO SOMETHING
-                this.contactstsService.deleteContact(contact.id).subscribe(contact => {
+                this.contactsService.deleteContact(contact.id).subscribe(contact => {
                     this.getClient();
                     this.snackBar.open('supprimé avec succès', 'success');
                 });

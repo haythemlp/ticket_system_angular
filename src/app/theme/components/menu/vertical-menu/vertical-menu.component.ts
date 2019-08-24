@@ -49,6 +49,7 @@ export class VerticalMenuComponent implements OnInit {
 
         return a != -1 ? true : false;
 
+
     }
 
 
