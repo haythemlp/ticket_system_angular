@@ -1,0 +1,19 @@
+<mat-card class="p-0 mt-5">
+    <mat-card-header class="bg-primary p-3" fxLayoutAlign="center">
+       <h2>Agenda</h2>
+    </mat-card-header>
+    <mat-card-content class="p-3">
+<full-calendar [selectable]="false"
+               locale="fr"
+               [editable]="true"
+               [navLinks]="true"
+               deepChangeDetection="true"
+               [header]="header"
+               [draggable]="true"
+               displayEventEnd="true"
+               eventLimit="true"
+               defaultView="dayGridMonth"
+               [events]="events"
+               [plugins]="calendarPlugins"></full-calendar>
+    </mat-card-content>
+</mat-card>

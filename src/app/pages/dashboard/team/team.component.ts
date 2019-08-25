@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import {environment} from "../../../../environments/environment.prod";
 
 @Component({
   selector: 'app-team',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamComponent implements OnInit {
 
+  public mediaUrl = environment.mediaUrl;
+  public url = environment.url;
+  @Input() team;
   constructor() { }
 
   ngOnInit() {
   }
+
+
 
 }

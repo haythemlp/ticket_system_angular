@@ -1,0 +1,43 @@
+<mat-card class="p-0 mt-5">
+    <mat-card-header class="bg-primary p-3" fxLayoutAlign="center">
+        <h2>Servers</h2>
+    </mat-card-header>
+    <mat-card-content class="p-3">
+        <form>
+            <mat-form-field class="px-3 py-1">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+            </mat-form-field>
+        </form>
+
+        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> name</mat-header-cell>
+                <mat-cell *matCellDef="let server"> {{server.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="url">
+                <mat-header-cell *matHeaderCellDef> url</mat-header-cell>
+                <mat-cell *matCellDef="let server"> {{server.url}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="company">
+                <mat-header-cell *matHeaderCellDef> Client</mat-header-cell>
+                <mat-cell *matCellDef="let server"> {{server.client.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ip">
+                <mat-header-cell *matHeaderCellDef> ip</mat-header-cell>
+                <mat-cell *matCellDef="let server"> {{server.ip}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+                <mat-cell *matCellDef="let server">
+                    <span *ngIf="server.status"> <mat-chip color="accent" selected="true"
+                                                           class="px-3 py-1">Active</mat-chip>   </span>
+                    <span *ngIf="!server.status"> <mat-chip color="warn" selected="true"
+                                                            class="px-3 py-1"> unactive </mat-chip> </span>
+
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card>

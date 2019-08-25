@@ -1,44 +1,44 @@
-<div fxLayout="row wrap">
+<div fxLayout="row wrap" *ngIf="stats">
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">        
         <mat-card class="gradient-green tile p-2"> 
-            <mat-icon>monetization_on</mat-icon> 
-            <h2>$33500</h2>         
-            <p>profit</p>            
+            <mat-icon>account_box</mat-icon>
+            <h2>{{stats.clients}}</h2>
+            <p>Client</p>
         </mat-card>
     </div>
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">        
         <mat-card class="gradient-red tile p-2"> 
-            <mat-icon>thumb_up_alt</mat-icon> 
-            <h2>5300</h2>         
-            <p>likes</p>            
+            <mat-icon>domain</mat-icon>
+            <h2>{{stats.servers}}</h2>
+            <p>Server</p>
         </mat-card>
     </div>
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">
         <mat-card class="gradient-orange tile p-2">
             <mat-icon>group</mat-icon> 
-            <h2>14280</h2>         
+            <h2>{{stats.users}}</h2>
             <p>users</p> 
         </mat-card>
     </div>
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">
         <mat-card class="gradient-pink tile p-2">
-            <mat-icon>shopping_cart</mat-icon> 
-            <h2>7520</h2>         
-            <p>orders</p> 
+            <mat-icon>work</mat-icon>
+            <h2>{{stats.roles}}</h2>
+            <p>Roles</p>
         </mat-card>
     </div>
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">
         <mat-card class="gradient-gray tile p-2">
-            <mat-icon>pie_chart</mat-icon> 
-            <h2>$2700</h2>         
-            <p>tax</p> 
+            <mat-icon>receipt</mat-icon>
+            <h2>{{stats.tickets}}</h2>
+            <p>Ticket</p>
         </mat-card>
     </div>  
     <div fxFlex="50" fxFlex.xl="16.6" fxFlex.lg="16.6" fxFlex.md="33.3" fxFlex.sm="33.3" class="p-2">
         <mat-card class="gradient-brown tile p-2">
-            <mat-icon>save_alt</mat-icon> 
-            <h2>12700</h2>         
-            <p>downloads</p> 
+            <mat-icon>event_note</mat-icon>
+            <h2>{{stats.events}}</h2>
+            <p>Event</p>
         </mat-card>
     </div>      
 </div>

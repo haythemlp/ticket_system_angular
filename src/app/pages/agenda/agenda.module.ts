@@ -11,6 +11,7 @@ import {AgendaDialogComponent} from './agenda-dialog/agenda-dialog.component';
 import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 
+
 export const routes = [
     {path: '', component: AgendaComponent, pathMatch: 'full'}
 ];
@@ -30,8 +31,11 @@ export const routes = [
     ],
     declarations: [AgendaComponent, AgendaDialogComponent],
     entryComponents: [AgendaDialogComponent],
-    providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'}
-    ]
+    providers:
+        [
+            {provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'}
+        ]
 })
+
 export class AgendaModule {
 }

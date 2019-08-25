@@ -5,7 +5,7 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {ServersDialogComponent} from './servers-dialog/servers-dialog.component';
 import {SnackbarService} from '../../services/snackbar.service';
 import {ConfirmationComponent} from '../../shared/confirmation/confirmation.component';
-import {Client} from'../clients/client';
+import {Client} from '../clients/client';
 
 @Component({
     selector: 'app-servers',
@@ -18,7 +18,7 @@ export class ServersComponent implements OnInit {
     public clients: Client[];
     public showSearch: boolean = false;
     public dataSource: any;
-    public spiner: boolean = false;
+    public spiner = false;
 
     public displayedColumns = ['name', 'url', 'company', 'ip', 'actions'];
 
@@ -54,7 +54,7 @@ export class ServersComponent implements OnInit {
 
     public openServerDialog(server: Server) {
 
-        let data={clients:this.clients,server: Object.assign({}, server)};
+        let data = {clients: this.clients, server: Object.assign({}, server)};
 
 
         let dialogRef = this.dialog.open(ServersDialogComponent, {

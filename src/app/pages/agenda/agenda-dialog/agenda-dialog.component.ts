@@ -1,7 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {Agenda} from "../agenda";
+import {AgendaService} from "../agenda.service";
+import {ConfirmationComponent} from "../../../shared/confirmation/confirmation.component";
 
 @Component({
     selector: 'app-agenda-dialog',
@@ -16,27 +18,33 @@ export class AgendaDialogComponent implements OnInit {
         {text: 'interview', value: 'red'},
         {text: 'grand', value: 'green'}
     ];
+    public update = true;
 
 
     constructor(public dialogRef: MatDialogRef<AgendaDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public event: Agenda,
-                public fb: FormBuilder) {
+                @Inject(MAT_DIALOG_DATA) public event: Agenda, private dialog: MatDialog,
+                public fb: FormBuilder, private service: AgendaService) {
         this.form = this.fb.group({
             id: null,
             title: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-            start: null,
-            end: null,
+            text: '',
+            start: [null, Validators.required],
+            end: [null, Validators.required],
             color: null
         });
     }
 
     ngOnInit() {
-        if (this.event) {
 
+        this.update = true;
+        if (this.event) {
+            this.update = !this.event.id;
             this.form.patchValue(this.event);
 
         } else {
             this.event = Agenda.new();
+
+
         }
         this.form.updateValueAndValidity();
     }
@@ -44,6 +52,19 @@ export class AgendaDialogComponent implements OnInit {
 
     close(): void {
         this.dialogRef.close();
+    }
+
+
+    delete = () => {
+        const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '350px',
+            data: 'Do you confirm delete?'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.service.delete(this.event.id).subscribe(() => this.dialogRef.close());
+            }
+        });
     }
 
 

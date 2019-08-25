@@ -13,7 +13,7 @@ export class SnackbarService {
     public open(message, action = 'success') {
 
         this.zone.run(() => {
-            this.snackBar.open(message, action, {
+            this.snackBar.open(message, 'X', {
                 duration: 2000,
                 verticalPosition: 'top',
                 horizontalPosition: 'end',

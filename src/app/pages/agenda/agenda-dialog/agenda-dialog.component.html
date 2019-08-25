@@ -1,36 +1,87 @@
-<h1 mat-dialog-title><span *ngIf="!event.id">Add</span><span *ngIf="event.id">Edit</span> Event</h1>
+<div >
+    <button fxLayout="row" fxLayoutAlign="right" style="float: right" (click)="close()" mat-button color="warn">
+        <mat-icon >close</mat-icon>
+    </button>
+</div>
+
+
+<h1 mat-dialog-title class="text-center">
+    <ng-container *ngIf="event.edit">
+        <span *ngIf="!event.id">Add</span>
+        <span *ngIf="event.id && update">Edit</span>
+        <span *ngIf="update"> Event</span>
+    </ng-container>
+    <span *ngIf="!update && event.id"> {{event.title}}</span>
+
+</h1>
 <div mat-dialog-content>
-    <form [formGroup]="form" class="user-form">
+    <ng-container *ngIf="event.edit">
+        <div *ngIf="update || !event.id">
+            <form [formGroup]="form" class="user-form">
 
-        <mat-form-field class="w-100 mr-2">
-            <input matInput placeholder="Title" formControlName="title" required>
-            <mat-error *ngIf="form.controls.title.errors?.required">Name is required</mat-error>
-        </mat-form-field>
 
-        <mat-form-field class="w-100 mr-2">
-            <mat-select placeholder="Choose type" formControlName="color" name="type">
-                <mat-option *ngFor="let type of types" [value]="type.value">
-                    <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="w-100 mr-2">
+                    <input matInput placeholder="Title" formControlName="title" required>
+                    <mat-error *ngIf="form.controls.title.errors?.required">Name is required</mat-error>
+                </mat-form-field>
 
-                        <span class="mx-3">{{type.text}}</span>
-                    </div>
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-form-field class="w-100 mr-2">
+                <textarea matInput placeholder="Title" formControlName="text" required>
 
-        <mat-form-field class="w-100 mr-2">
-            <input matInput [owlDateTimeTrigger]="dt" [owlDateTime]="dt" placeholder="date start"  formControlName="start">
-            <owl-date-time #dt ></owl-date-time>
-        </mat-form-field>
+                </textarea>
 
-        <mat-form-field class="w-100 mr-2">
-            <input matInput [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="date end"  formControlName="end">
-            <owl-date-time #dt2 ></owl-date-time>
-        </mat-form-field>
-    </form>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mr-2">
+                    <mat-select placeholder="Choose type" formControlName="color" name="type">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
+                            <div fxLayout="row" fxLayoutAlign="start center">
+
+                                <span class="mx-3">{{type.text}}</span>
+                            </div>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mr-2">
+                    <input matInput [owlDateTimeTrigger]="dt" [owlDateTime]="dt" placeholder="date start"
+                           formControlName="start">
+                    <owl-date-time #dt></owl-date-time>
+                    <mat-error *ngIf="form.controls.start.errors?.required">date start is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100 mr-2">
+                    <input matInput [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="date end"
+                           formControlName="end">
+                    <owl-date-time #dt2></owl-date-time>
+                    <mat-error *ngIf="form.controls.end.errors?.required">date end is required</mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </ng-container>
+    <div *ngIf="!update && event.id">
+
+        <p>{{event.text}}</p>
+        <p *ngIf="event.user.firstname"><mat-icon>perm_identity</mat-icon>{{event.user.firstname}} {{event.user.lastname}}</p>
+        <p *ngIf="!event.user.firstname"><mat-icon>perm_identity</mat-icon> {{event.user.username}}</p>
+
+        <p><mat-icon>date_range</mat-icon> {{event.start | date:'dd-MM-yy hh:mm'}}</p>
+        <p><mat-icon>date_range</mat-icon>{{event.end | date:'dd-MM-yy hh:mm'}}</p>
+    </div>
 </div>
-<div mat-dialog-actions fxLayout="row" fxLayoutAlign="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
-            *ngIf="!event.id">Save</span><span *ngIf="event.id">Update</span></button>
-    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
-</div>
+<ng-container *ngIf="event.edit">
+    <div mat-dialog-actions fxLayout="row">
+
+        <button mat-raised-button *ngIf="event.id" (click)="update=!update">
+            <span *ngIf="update"> info</span>
+            <span *ngIf="!update"> edit</span>
+        </button>
+        <button mat-raised-button *ngIf="update" color="primary" [mat-dialog-close]="form.value"
+                [disabled]="!form.valid" fxLayoutAlign="left">
+            <span *ngIf="!event.id">Save</span>
+            <span *ngIf="event.id">Update</span>
+        </button>
+        <button mat-raised-button *ngIf="event.id" (click)="delete()" color="warn" fxLayoutAlign="right">delete</button>
+
+    </div>
+</ng-container>
