@@ -60,14 +60,14 @@ export class RolesComponent implements OnInit {
         this.rolesService.addRoles(role).subscribe(role => {
             this.getRoles();
 
-            this.snackBar.open('ajouter avec succès', 'success');
+          
         });
     }
 
     public updateRole(role: Roles) {
         this.rolesService.updateRoles(role).subscribe(role => {
             this.getRoles();
-            this.snackBar.open('mise à jour avec succès', 'success');
+          
 
         });
     }
@@ -80,12 +80,9 @@ export class RolesComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                console.log('Yes clicked');
-                // DO SOMETHING
-
+               
                  this.rolesService.deleteRoles(role.id).subscribe(role => {
             this.getRoles();
-            this.snackBar.open('supprimé avec succès', 'close');
 
 
         });

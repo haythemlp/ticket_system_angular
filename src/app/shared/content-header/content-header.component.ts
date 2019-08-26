@@ -15,6 +15,8 @@ export class ContentHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    console.log(this.title)
   }
 
 }

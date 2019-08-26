@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
     public addUser(user: User) {
         this.usersService.addUser(user).subscribe(user => {
             this.getUsers();
-            this.snackBar.open('ajouter avec succès', 'success');
         });
     }
 
@@ -62,7 +61,6 @@ export class UsersComponent implements OnInit {
         this.usersService.updateUser(user).subscribe(user => {
             this.getUsers();
 
-            this.snackBar.open('mise a jour avec succès', 'success');
         });
     }
 
@@ -74,13 +72,10 @@ export class UsersComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                console.log('Yes clicked');
-                // DO SOMETHING
-
+             
                 this.usersService.deleteUser(user.id).subscribe(user => {
                     this.getUsers();
 
-                    this.snackBar.open('supprimé avec succès', 'success');
 
                 });
             }

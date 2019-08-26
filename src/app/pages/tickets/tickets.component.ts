@@ -229,7 +229,7 @@ this.snackBar.open('supprimé avec succès', 'success');
             this.getTickets();
             this.newTicket=false;
 
-            this.snackBar.open('ajouter avec succès', 'success');
+          
 
 
         });
@@ -238,7 +238,7 @@ this.snackBar.open('supprimé avec succès', 'success');
     public updateTicket(ticket) {
         this.ticketsService.updateTicket(ticket).subscribe(() => {
             this.getTickets();
-            this.snackBar.open('mise à jour avec succès', 'success');
+        
 
 
         });
@@ -253,7 +253,7 @@ this.snackBar.open('supprimé avec succès', 'success');
             this.getTickets();
             this.newTicket=false;
 
-            this.snackBar.open('ajouter avec succès', 'success');
+          
 
 
         });
@@ -262,7 +262,7 @@ this.snackBar.open('supprimé avec succès', 'success');
     public updateReply(reply) {
         this.ticketsService.updateTicket(reply).subscribe(() => {
             this.getTickets();
-            this.snackBar.open('mise à jour avec succès', 'success');
+          
 
 
         });
@@ -270,7 +270,7 @@ this.snackBar.open('supprimé avec succès', 'success');
   public changeType(status) {
         this.ticketsService.editType(status,this.ticket.id).subscribe(() => {
             this.getTickets();
-            this.snackBar.open('mise à jour avec succès', 'success');
+         
               this.ticket = null;
 
 

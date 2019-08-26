@@ -3,13 +3,11 @@
        <h2>Agenda</h2>
     </mat-card-header>
     <mat-card-content class="p-3">
-<full-calendar [selectable]="false"
+<full-calendar 
                locale="fr"
-               [editable]="true"
                [navLinks]="true"
                deepChangeDetection="true"
                [header]="header"
-               [draggable]="true"
                displayEventEnd="true"
                eventLimit="true"
                defaultView="dayGridMonth"

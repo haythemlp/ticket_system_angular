@@ -19,13 +19,7 @@ export class AuthService {
         this.http.postHttp(apiUrl + 'login', form).subscribe((data) => {
                 console.log(data.data.token);
                 localStorage.setItem('user', JSON.stringify(data.data.user));
-                localStorage.setItem('token', data.data.token);
-                this.snackBar.open('logged with success', 'X', {
-                    duration: 2000,
-                    verticalPosition: 'top',
-                    horizontalPosition: 'end',
-                    panelClass: ['snackbar', 'success']
-                });
+                localStorage.setItem('token', data.data.token);       
                 this.router.navigate(['/']);
             }
         );
@@ -36,13 +30,7 @@ export class AuthService {
     logout(): void {
         this.http.postHttp(apiUrl + 'logout', {}).subscribe((data) => {
                 console.log(data);
-                localStorage.clear();
-                this.snackBar.open(data.message, 'X', {
-                    duration: 2000,
-                    verticalPosition: 'top',
-                    horizontalPosition: 'end',
-                    panelClass: ['snackbar', 'success']
-                });
+                localStorage.clear();            
                 this.router.navigate(['/login']);
             }
         );

@@ -87,7 +87,6 @@ export class ChildComponent implements OnInit {
 
             this.getClient();
 
-            this.snackBar.open('ajouter avec succès', 'success');
 
 
         });
@@ -97,7 +96,6 @@ export class ChildComponent implements OnInit {
     public updateClient(client: Client) {
         this.clientsService.updateClient(client).subscribe(client => {
             this.getClient();
-            this.snackBar.open('mise à jour avec succès', 'success');
 
 
         });
@@ -106,7 +104,6 @@ export class ChildComponent implements OnInit {
     public updateContact(contact: Contact) {
         this.contactsService.updateContact(contact).subscribe(contact => {
             this.getClient();
-            this.snackBar.open('mise à jour avec succès', 'success');
 
 
         });
@@ -120,11 +117,9 @@ export class ChildComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                console.log('Yes clicked');
-                // DO SOMETHING
+               
                 this.contactsService.deleteContact(contact.id).subscribe(contact => {
                     this.getClient();
-                    this.snackBar.open('supprimé avec succès', 'success');
                 });
             }
         });

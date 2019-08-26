@@ -74,7 +74,6 @@ export class ServersComponent implements OnInit {
         this.serversService.addServer(server).subscribe(() => {
             this.getservers();
 
-            this.snackbar.open('ajouter avec success', 'success');
         });
     }
 
@@ -82,7 +81,6 @@ export class ServersComponent implements OnInit {
         this.serversService.updateServer(server).subscribe(() => {
             this.getservers();
 
-            this.snackbar.open(' modifier avec success', 'success');
         });
     }
 
@@ -94,12 +92,10 @@ export class ServersComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                console.log('Yes clicked');
-                // DO SOMETHING
+              
 
                 this.serversService.deleteServer(server.id).subscribe(() => {
                     this.getservers();
-                    this.snackbar.open('supprimer avec success', 'success');
                 });
             }
         });

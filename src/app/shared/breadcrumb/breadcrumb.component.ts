@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,Input} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, UrlSegment} from "@angular/router";
 import {Title} from '@angular/platform-browser';
 import {AppSettings} from '../../app.settings';
@@ -12,6 +12,8 @@ import {MenuService} from '../../theme/components/menu/menu.service';
     providers: [MenuService]
 })
 export class BreadcrumbComponent {
+
+     @Input() public breadcrumb:string;
 
     public pageTitle: string;
     public breadcrumbs: {
@@ -42,6 +44,10 @@ export class BreadcrumbComponent {
 
     private parseRoute(node: ActivatedRouteSnapshot) {
         if (node.data['breadcrumb']) {
+console.log(this.breadcrumb)
+
+const name=  (this.breadcrumb && node.data['breadcrumb'] =='show' ) ? this.breadcrumb : node.data['breadcrumb']; 
+
             if (node.url.length) {
                 let urlSegments: UrlSegment[] = [];
                 node.pathFromRoot.forEach(routerState => {
@@ -51,12 +57,14 @@ export class BreadcrumbComponent {
                     return urlSegment.path;
                 }).join('/');
                 this.breadcrumbs.push({
-                    name: node.data['breadcrumb'],
+                    name: name,
                     url: '/' + url
                 })
             }
+             console.log(node.data['breadcrumb']);
         }
-        if (node.firstChild) {
+        if (this.breadcrumb,node.firstChild) {
+          
             this.parseRoute(node.firstChild);
         }
     }

@@ -59,28 +59,13 @@ export class ClientsComponent implements OnInit {
 
     }
 
-    public addClient(client: Client) {
-        this.clientsService.addClient(client).subscribe(() => {
+     addClient = (client: Client) =>   this.clientsService.addClient(client).subscribe(() =>   this.getclients());
+    
 
+     updateClient = (client: Client) => this.clientsService.updateClient(client).subscribe(() =>  this.getclients());
+    
 
-            this.getclients();
-
-            this.snackBar.open('ajouter avec succès', 'success');
-
-
-        });
-    }
-
-    public updateClient(client: Client) {
-        this.clientsService.updateClient(client).subscribe(() => {
-            this.getclients();
-            this.snackBar.open('mise à jour avec succès', 'success');
-
-
-        });
-    }
-
-    public deleteClient(client: Client) {
+     deleteClient = (client: Client) => {
 
 
         const dialogRef = this.dialog.open(ConfirmationComponent, {
@@ -91,7 +76,6 @@ export class ClientsComponent implements OnInit {
             if (result) {
                 this.clientsService.deleteClient(client.id).subscribe(() => {
                     this.getclients();
-                    this.snackBar.open('supprimé avec succès', 'success');
                 });
             }
         });
