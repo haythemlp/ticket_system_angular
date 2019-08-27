@@ -47,16 +47,15 @@ export class UserDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-     
+/*     
 $(document).ready(function(){
 
    console.log($('.dropify')) ;
   $('.dropify').dropify();
-});
+});*/
 
         this.user = this.data.user;
         this.roles = this.data.roles;
-        console.log(this.roles);
         if (this.user) {
           
 

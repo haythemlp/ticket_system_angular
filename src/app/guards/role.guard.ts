@@ -18,30 +18,38 @@ export class RoleGuard implements CanActivateChild {
     canActivateChild(next: ActivatedRouteSnapshot,
                      state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        // const url = state.url;
-        //
-        // let menu = verticalMenuItems.find((obj) => {
-        //     return obj.routerLink == url;
-        // });
-        // const listMenu = JSON.parse(this.user.role.menu);
-        // if (menu) {
-        //
-        //
-        //     if (listMenu.indexOf(+menu.id) == -1) {
-        //
-        //         const url = this.router.url ? this.router.url : '/';
-        //         this.snackBar.open('unauthaurized', 'X', {
-        //             duration: 10000,
-        //             verticalPosition: 'top',
-        //             horizontalPosition: 'end',
-        //             panelClass: ['snackbar', 'danger']
-        //         });
-        //
-        //         this.router.navigate([url]);
-        //         return false;
-        //
-        //     }
-        // }
+        const url = state.url;
+      
+       
+        let menu = verticalMenuItems.find((obj) => {
+            return obj.routerLink == url;
+        });
+
+        if (!menu) {
+            menu = verticalMenuItems.find((obj) => {
+            return obj.title == next.data.base;
+        });
+        }
+
+
+        const listMenu = JSON.parse(this.user.role.menu);
+        if (menu) {
+       
+            if (listMenu.indexOf(+menu.id) == -1) {
+       
+                const url = this.router.url ? this.router.url : '/';
+                this.snackBar.open('unauthaurized', 'X', {
+                    duration: 10000,
+                    verticalPosition: 'top',
+                    horizontalPosition: 'end',
+                    panelClass: ['snackbar', 'danger']
+                });
+       
+                this.router.navigate([url]);
+                return false;
+       
+            }
+        }
 
         return true;
     }

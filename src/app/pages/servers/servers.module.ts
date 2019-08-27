@@ -12,7 +12,7 @@ import { ChildComponent } from './child/child.component';
 
 export const routes = [
     {path: '', component: ServersComponent, pathMatch: 'full'},
-    {path: ':id', component: ChildComponent, pathMatch: 'full' ,data: { breadcrumb: 'show' }}
+    {path: ':id', component: ChildComponent, pathMatch: 'full' ,data: { breadcrumb: 'show',base:'Clients' }}
 ];
 
 @NgModule({

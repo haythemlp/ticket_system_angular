@@ -22,8 +22,9 @@ import {ConfirmationComponent} from '../../shared/confirmation/confirmation.comp
 })
 export class TicketsComponent implements OnInit {
 	public status:string ='all';
- @ViewChild('sidenav') sidenav: any;
- @ViewChild('reply') replydiv ;
+  @ViewChild('sidenav') sidenav: any;
+  @ViewChild('reply') replydiv ;
+  public user =JSON.parse(localStorage.getItem("user")) ;
   public settings: Settings;
   public answers:any;
   public sidenavOpen:boolean = true;
@@ -35,53 +36,37 @@ export class TicketsComponent implements OnInit {
   public questions=[];
   public types=[];
   public ticket: Ticket;
+  public editableTicket:Ticket =null;
   public newTicket: boolean;
   public replyTicket: boolean;
-     public spiner: boolean = false;
+    public spiner: boolean = false;
  
   public showSearch:boolean = false;
   public searchText: string;
-  public form:FormGroup;
    public replyForm:FormGroup;
 
-  constructor(private ticketsService:TicketsService,public appSettings:AppSettings, 
-              public formBuilder: FormBuilder,public dialog: MatDialog, 
+
+  constructor(public formBuilder: FormBuilder,private ticketsService:TicketsService,public appSettings:AppSettings,public dialog: MatDialog, 
               public snackBar: SnackbarService,private ref: ChangeDetectorRef ) { 
 
   }
 
-get addDynamicElement() {
-  return this.form.get('answers') as FormArray
-}
-
-addItems() {
-  this.addDynamicElement.push(this.formBuilder.control(false))
-}
 
 
   ngOnInit() {
- this.getTickets();  
 
-  	 
+  this.replyForm = this.formBuilder.group({
+      'ticket_id': [null, Validators.required],   
+      'body': [null, Validators.required]
+    });   
+
+  	 this.getTickets();  
     if(window.innerWidth <= 992){
       this.sidenavOpen = false;
     }
 
 
 
-    this.form = this.formBuilder.group({
-      'client_id': [null, Validators.required],
-      'server_id': [null, Validators.required],
-      'type':[null, Validators.required],
-      'sujet': [null, Validators.required],    
-      'body': [null, Validators.required],
-      'answers':this.formBuilder.array([])
-    });  
-
-     this.replyForm = this.formBuilder.group({
-      'ticket_id': [null, Validators.required],   
-      'body': [null, Validators.required]
-    });  
 
 
   }
@@ -97,10 +82,8 @@ public getTickets(){
           this.serversList=data.servers;
           this.questions=data.questions;
           this.types=data.types;
-          for (var i = 0; i < this.questions.length; ++i) {
- this.addItems();
+    
  this.spiner= true;
-}
 
 
 
@@ -141,7 +124,6 @@ scroll(el: HTMLElement) {
     
     }   
 
-    console.log(this.tickets);  
   }
 
   public viewDetail(id){
@@ -173,100 +155,33 @@ public delete(){
 this.snackBar.open('supprimé avec succès', 'success');
 
             	})
-               
+        
                     
                
             }
         });
 }
 
-  public compose(){
+  public compose(data:Ticket){
+    this.editableTicket=data;
     this.ticket = null;
     this.replyTicket=false;
     this.newTicket = true;
+    
+
+
+
   }
 
 
 
-  public onSubmit(ticket){
-    console.log(ticket)
-
-    var answers=[]
-    for (var i =0 ;  i < this.questions.length; i++) {
-      var question= this.questions[i];
-      answers.push({name:question.text,value:ticket.answers[i]})
-
-    }
-
-    ticket.answers=answers;
-    if (this.form.valid) {
-     
-(ticket.id) ? this.updateTicket(ticket) : this.addTicket(ticket);
-
-      this.form.reset();     
-    }
-  }
-
-    public replySubmit(reply){
-   
-    this.replyTicket=false;
-   
-   if (this.replyForm.valid) {
-     
- (reply.id) ? this.updateReply(reply) : this.addReply(reply);
-
-      this.form.reset();     
-    }
-
-     this.replyForm.reset();
-  }
-
-
- public addTicket(ticket) {
-        this.ticketsService.addTicket(ticket).subscribe(data => {
-
-
-            this.getTickets();
-            this.newTicket=false;
-
-          
-
-
-        });
-    }
-
-    public updateTicket(ticket) {
-        this.ticketsService.updateTicket(ticket).subscribe(() => {
-            this.getTickets();
-        
-
-
-        });
-    }
 
 
 
-     public addReply(reply) {
-        this.ticketsService.addReply(reply).subscribe(data => {
 
+  
 
-            this.getTickets();
-            this.newTicket=false;
-
-          
-
-
-        });
-    }
-
-    public updateReply(reply) {
-        this.ticketsService.updateTicket(reply).subscribe(() => {
-            this.getTickets();
-          
-
-
-        });
-    }
+  
   public changeType(status) {
         this.ticketsService.editType(status,this.ticket.id).subscribe(() => {
             this.getTickets();
@@ -277,6 +192,25 @@ this.snackBar.open('supprimé avec succès', 'success');
         });
     }
 
+
+ public addTicket(ticket) {
+        this.ticketsService.addTicket(ticket).subscribe(data => {
+         this.getTickets();
+           this.newTicket=false;        });
+    }
+
+    public updateTicket(ticket) {
+        this.ticketsService.updateTicket(ticket).subscribe(() => {
+            this.getTickets();
+             this.newTicket=false;
+
+
+        });
+    }
+
+
+
+// Reply 
 
 reply(){
 
@@ -294,18 +228,47 @@ reply(){
   //this.replydiv.nativeElement.scrollIntoView();
 }
 
-clientSelect(){
-
-const client_id=this.form.controls['client_id'].value;
-
-if (client_id) {
-  
-this.servers=this.serversList.filter(servers=>servers.client_id==client_id);
-
-}
-}
 
 
+    public replySubmit(reply){
+   
+    this.replyTicket=false;
+   
+   if (this.replyForm.valid) {
+     
+ (reply.id) ? this.updateReply(reply) : this.addReply(reply);
+
+   
+    }
+
+     this.replyForm.reset();
+  }
+
+
+
+
+
+   public addReply(reply) {
+        this.ticketsService.addReply(reply).subscribe(data => {
+            this.getTickets();
+            this.replyTicket=false;
+        });
+    }
+
+
+  public updateReply(reply) {
+        this.ticketsService.updateTicket(reply).subscribe(() => {
+            this.getTickets();  
+
+        });
+    }
+
+     public deleteReply(reply) {
+        this.ticketsService.deleteReply(reply.id).subscribe(() => {
+            this.getTickets();  
+
+        });
+    }
 
 
 }

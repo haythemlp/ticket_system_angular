@@ -44,9 +44,7 @@ export class BreadcrumbComponent {
 
     private parseRoute(node: ActivatedRouteSnapshot) {
         if (node.data['breadcrumb']) {
-console.log(this.breadcrumb)
 
-const name=  (this.breadcrumb && node.data['breadcrumb'] =='show' ) ? this.breadcrumb : node.data['breadcrumb']; 
 
             if (node.url.length) {
                 let urlSegments: UrlSegment[] = [];
@@ -57,11 +55,10 @@ const name=  (this.breadcrumb && node.data['breadcrumb'] =='show' ) ? this.bread
                     return urlSegment.path;
                 }).join('/');
                 this.breadcrumbs.push({
-                    name: name,
+                    name: node.data['breadcrumb'],
                     url: '/' + url
                 })
             }
-             console.log(node.data['breadcrumb']);
         }
         if (this.breadcrumb,node.firstChild) {
           

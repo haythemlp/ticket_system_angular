@@ -11,6 +11,8 @@ import { QuestionsComponent } from './questions/questions.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { DialogQuestionComponent } from './questions/dialog-question/dialog-question.component';
 import { DialogCategoryComponent } from './categories/dialog-category/dialog-category.component';
+import { NewTicketComponent } from './new-ticket/new-ticket.component';
+import { ReadTicketComponent } from './read-ticket/read-ticket.component';
 
 
 export const routes = [
@@ -30,7 +32,7 @@ export const routes = [
         SharedModule,
         PipesModule
     ],
-    declarations: [TicketsComponent, QuestionsComponent, CategoriesComponent, DialogQuestionComponent, DialogCategoryComponent],
+    declarations: [TicketsComponent, QuestionsComponent, CategoriesComponent, DialogQuestionComponent, DialogCategoryComponent, NewTicketComponent, ReadTicketComponent],
      entryComponents:[DialogQuestionComponent,DialogCategoryComponent]
 })
 export class TicketsModule {

@@ -1,0 +1,66 @@
+          <form  [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="mail-body">
+
+                <mat-grid-list cols="2" rowHeight="60px">
+                       <mat-grid-tile >
+                <mat-form-field class="w-100 px-2">
+                 <mat-select placeholder="Choose client" formControlName="client_id" (selectionChange)="clientSelect()" name="client">
+                                    <mat-option *ngFor="let client of clients" [value]="client.id">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="mx-3">{{client.name}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </mat-grid-tile>
+                             <mat-grid-tile>
+
+               <mat-form-field class="w-100 px-2">
+               <mat-select placeholder="Choose server" formControlName="server_id" name="server">
+                                    <mat-option *ngFor="let server of servers" [value]="server.id">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="mx-3">{{server.name}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+            <mat-form-field class="w-100 px-2">
+              <input matInput placeholder="Sujet" formControlName="sujet">
+            </mat-form-field>
+              </mat-grid-tile>
+
+                          <mat-grid-tile>
+            <mat-form-field class="w-100 px-2">
+             <mat-select placeholder="Choose type" formControlName="type_id" name="type">
+                                    <mat-option *ngFor="let type of types" [value]="type.id">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <span class="mx-3">{{type.text}}</span>
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+            </mat-form-field>
+              </mat-grid-tile>
+                            </mat-grid-list>
+                        
+
+
+
+              <div formArrayName="answers">
+                <section class="py-2" *ngFor="let question of questions;let i = index;">
+                    <label class="mx-2"> {{question.text}}:</label>
+                     <mat-slide-toggle matInput  class="my-2"  [formControlName]="i"></mat-slide-toggle>
+                </section>
+
+              </div>
+
+                
+              <label>{{answers}}</label>
+    
+
+                         <quill-editor formControlName="body"></quill-editor>
+               <div fxLayout="row" fxLayoutAlign="space-between center">
+              <button mat-raised-button (click)="newTicket = false;" type="button">Cancel</button>
+              <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Send</button>
+            </div>
+          </form>

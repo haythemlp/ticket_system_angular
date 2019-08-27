@@ -22,7 +22,7 @@ export const routes: Routes = [
             {path: 'users', loadChildren: './pages/users/users.module#UsersModule', data: {breadcrumb: 'Users'}},
             {path: 'agenda', loadChildren: './pages/agenda/agenda.module#AgendaModule', data: {breadcrumb: 'Agenda'}},
             {path: 'tickets', loadChildren: './pages/tickets/tickets.module#TicketsModule', data: {breadcrumb: 'Tickets'}},
-            {
+           /* {
                 path: 'dynamic-menu',
                 loadChildren: './pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule',
                 data: {breadcrumb: 'Dynamic Menu'}
@@ -43,12 +43,12 @@ export const routes: Routes = [
             {path: 'icons', loadChildren: './pages/icons/icons.module#IconsModule', data: {breadcrumb: 'Material Icons'}},
             {path: 'blank', component: BlankComponent, data: {breadcrumb: 'Blank page'}},
             {path: 'search', component: SearchComponent, data: {breadcrumb: 'Search'}},
-            {path: 'search/:name', component: SearchComponent, data: {breadcrumb: 'Search'}}
+            {path: 'search/:name', component: SearchComponent, data: {breadcrumb: 'Search'}}*/
         ], canActivate: [AuthGuard], canActivateChild: [RoleGuard]
     },
-    {path: 'landing', loadChildren: './pages/landing/landing.module#LandingModule'},
+   // {path: 'landing', loadChildren: './pages/landing/landing.module#LandingModule'},
     {path: 'login', canActivate: [GuestGuard], loadChildren: './pages/login/login.module#LoginModule'},
-    {path: 'register', canActivate: [GuestGuard], loadChildren: './pages/register/register.module#RegisterModule'},
+   // {path: 'register', canActivate: [GuestGuard], loadChildren: './pages/register/register.module#RegisterModule'},
     {path: 'error', component: ErrorComponent, data: {breadcrumb: 'Error'}},
     {path: '**', component: NotFoundComponent}
 ];

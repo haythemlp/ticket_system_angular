@@ -3,6 +3,7 @@ export class Ticket {
     public id: number;
     public client_id: number;
     public server_id: number;
+    public type_id: number;
     public client: string;
     public server: string;
     public sujet: string;
@@ -25,12 +26,14 @@ export class Ticket {
             let ticket = new Ticket();
             ticket.id = parseInt(t.id);
             ticket.client_id = t.client_id;
+            ticket.server_id = t.server_id;
             ticket.sujet = t.sujet;
             ticket.body = t.body;
             ticket.created_at = t.created_at;
             ticket.client = t.client.name;
             ticket.status = t.status;
             ticket.type = t.type.text;
+              ticket.type_id = t.type_id;
             ticket.questions = (t.questions) ? JSON.parse(t.questions) : [];
             ticket.selected = false;
             ticket.replies = t.replies;
