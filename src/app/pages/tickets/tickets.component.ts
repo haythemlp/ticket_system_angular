@@ -82,10 +82,9 @@ public getTickets(){
           this.serversList=data.servers;
           this.questions=data.questions;
           this.types=data.types;
-    
+
+
  this.spiner= true;
-
-
 
  this.getAllTickets();  
 

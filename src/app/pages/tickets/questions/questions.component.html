@@ -1,7 +1,7 @@
 <app-content-header
-        [icon]="'check_box_outline_blank'"
-        [title]="'Page title'"
-        [desc]="'Lorem ipsum dolor sit amet,'"
+        [icon]="'question_answer'"
+        [title]="'Questions ticket'"
+        [desc]="''"
         [hideBreadcrumb]="false"
         [hasBgImage]="true"
         [class]="'pb-5'"></app-content-header>
@@ -16,7 +16,7 @@
     </div>
     <form class="search"  [class.show]="showSearch">
         <mat-form-field class="px-3 py-1">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
         </mat-form-field>
     </form>
 
@@ -28,11 +28,11 @@
 
     <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> id</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Numéro</mat-header-cell>
         <mat-cell *matCellDef="let question" > {{question.id}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> question</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Question</mat-header-cell>
         <mat-cell *matCellDef="let question"> {{question.text}} </mat-cell>
       </ng-container>
 

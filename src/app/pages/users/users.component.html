@@ -1,7 +1,7 @@
 <app-content-header 
     [icon]="'supervisor_account'" 
-    [title]="'Users'" 
-    [desc]="'View information about the users, search, add, edit or delete any user.'"
+    [title]="'Utilisateurs'" 
+    [desc]="'Afficher des informations sur les utilisateurs, rechercher, ajouter, modifier ou supprimer un utilisateur.'"
     [hideBreadcrumb]="false"
     [hasBgImage]="true" 
     [class]="'pb-5'"></app-content-header>
@@ -17,7 +17,7 @@
     </div>
     <form class="user-search" [class.show]="showSearch">
         <mat-form-field class="user-search-input">
-            <input matInput placeholder="Search user by name..." [(ngModel)]="searchText" name="search">
+            <input matInput placeholder="Recherche par Nom..." [(ngModel)]="searchText" name="search">
         </mat-form-field>
     </form>
     <div fxLayout="row">
@@ -70,15 +70,15 @@
                         <span (mouseleave)="menuTrigger.closeMenu()">
                             <button mat-menu-item (click)="openUserDialog(user)">
                                 <mat-icon>mode_edit</mat-icon>
-                                <span>Edit</span>
+                                <span>Modifier</span>
                             </button>
                             <button mat-menu-item (click)="deleteUser(user);">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
+                                <span>Supprimer</span>
                             </button>
                             <button mat-menu-item >
                                 <mat-icon>block</mat-icon>
-                                <span >Block</span>
+                                <span >Bloquer</span>
                                
                             </button>
                         </span>
@@ -143,15 +143,15 @@
                             <span (mouseleave)="menuTrigger.closeMenu()">
                                 <button mat-menu-item (click)="openUserDialog(user)">
                                     <mat-icon>mode_edit</mat-icon>
-                                    <span>Edit</span>
+                                    <span>Modifier</span>
                                 </button>
                                 <button mat-menu-item (click)="deleteUser(user);">
                                     <mat-icon>delete</mat-icon>
-                                    <span>Delete</span>
+                                    <span>Supprimer</span>
                                 </button>
                                 <button mat-menu-item (click)="user.settings.isDeleted = !user.settings.isDeleted">
                                     <mat-icon>block</mat-icon>
-                                    <span >Block</span>
+                                    <span >Bloquer</span>
                                 </button>
                             </span>
                         </mat-menu>

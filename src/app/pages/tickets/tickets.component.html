@@ -1,11 +1,11 @@
 <app-content-header
-        [title]="'Inbox'"
+        [title]="'List'"
         [hideBreadcrumb]="false"
         [hasBgImage]="true"
         [class]="'pb-5'"></app-content-header>
 
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" class="px-2 mailbox-toolbar">
-  <div fxLayout="row">
+  <div fxLayout="row" *ngIf="spiner">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>list</mat-icon>
     </button>
@@ -14,11 +14,11 @@
     </button>
     <mat-menu #filterMenu="matMenu">
             <span (mouseleave)="filterMenuTrigger.closeMenu()">
-                <button mat-menu-item (click)="status = 'all';getAllTickets();">All</button>
-                <button mat-menu-item (click)="status = 'new';getAllTickets();">new</button>
-                <button mat-menu-item (click)="status = 'read';getAllTickets();">Read</button>
-                <button mat-menu-item (click)="status = 'solved';getAllTickets();">Solved</button>
-                <button mat-menu-item (click)="status = 'unsolved';getAllTickets();">Unsloved</button>
+                <button mat-menu-item (click)="status = 'all';getAllTickets();">Tous</button>
+                <button mat-menu-item (click)="status = 'new';getAllTickets();">Nouveaux</button>
+                <button mat-menu-item (click)="status = 'read';getAllTickets();">Lu</button>
+                <button mat-menu-item (click)="status = 'solved';getAllTickets();">Resolu</button>
+                <button mat-menu-item (click)="status = 'unsolved';getAllTickets();">Non resolu</button>
             </span>
     </mat-menu>
     <button mat-icon-button (click)="showSearch = !showSearch">
@@ -27,11 +27,11 @@
   </div>
   <form class="mail-search" [class.show]="showSearch">
     <mat-form-field class="mail-search-input">
-      <input matInput placeholder="Search ticket..." [(ngModel)]="searchText" name="search">
+      <input matInput placeholder="Chercher ticket..." [(ngModel)]="searchText" name="search">
     </mat-form-field>
   </form>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button *ngIf="ticket" mat-icon-button matTooltip="Reply" (click)="reply()" matTooltipPosition="above">
+    <button *ngIf="ticket" mat-icon-button matTooltip="Repondre" (click)="reply()" matTooltipPosition="above">
       <mat-icon>reply</mat-icon>
     </button>
     <button *ngIf="newTicket" mat-icon-button (click)="newTicket = false;" matTooltip="Back" matTooltipPosition="above">
@@ -39,7 +39,7 @@
     </button>
    
 
-    <button *ngIf="ticket" mat-icon-button (click)="delete()" matTooltip="Move to trash" matTooltipPosition="above">
+    <button *ngIf="ticket" mat-icon-button (click)="delete()" matTooltip="Supprimer" matTooltipPosition="above">
       <mat-icon>delete</mat-icon>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="moreMenu" #moreMenuTrigger="matMenuTrigger" [style.display]="(ticket) ? 'block' : 'none'">
@@ -47,10 +47,10 @@
     </button>
     <mat-menu #moreMenu="matMenu" xPosition="before">
             <span (mouseleave)="moreMenuTrigger.closeMenu()">
-                <button *ngIf="ticket && ticket.status !='new' " mat-menu-item (click)="changeType('new')">Mark as new</button>
-                <button *ngIf="ticket && ticket.status !='read' " mat-menu-item (click)="changeType('read')">Mark as read</button>
-                 <button *ngIf="ticket && ticket.status !='solved' " mat-menu-item (click)="changeType('solved')">Mark as solved</button>
-                 <button *ngIf="ticket && ticket.status !='unsolved' " mat-menu-item (click)="changeType('unsolved')">Mark as unsolved</button>
+                <button *ngIf="ticket && ticket.status !='new' " mat-menu-item (click)="changeType('new')">Maquer comme nouveau</button>
+                <button *ngIf="ticket && ticket.status !='read' " mat-menu-item (click)="changeType('read')">Marquer comme lu</button>
+                 <button *ngIf="ticket && ticket.status !='solved' " mat-menu-item (click)="changeType('solved')">Marquer comme resolu</button>
+                 <button *ngIf="ticket && ticket.status !='unsolved' " mat-menu-item (click)="changeType('unsolved')">Marquer comme non resolu</button>
             </span>
     </mat-menu>
     <button mat-icon-button (click)="compose()" fxHide="false" fxHide.gt-xs>
@@ -145,9 +145,10 @@
    
     <mat-menu #moreMenuReply="matMenu" xPosition="before">
             <span (mouseleave)="moreMenuReplyTrigger.closeMenu()">
-                <button mat-menu-item (click)="reply.edit=false">Edit</button>
-            
-                <button mat-menu-item (click)="deleteReply(reply)">Delete</button>
+                <button mat-menu-item (click)="reply.edit=false">Modifier</button>
+
+                <button mat-menu-item (click)="deleteReply(reply)">Supprimer</button>
+
             </span>
     </mat-menu>
      
@@ -164,17 +165,19 @@
             <quill-editor formControlName="body"></quill-editor>
           
             <div fxLayout="row" fxLayoutAlign="space-between center">
-              <button mat-raised-button (click)="replyTicket = false;replyForm.reset()" type="button">Cancel</button>
-              <button mat-raised-button color="primary" [disabled]="!replyForm.valid" type="submit">Send</button>
+              <button mat-raised-button (click)="replyTicket = false;replyForm.reset()" type="button">Retour</button>
+              <button mat-raised-button color="primary" [disabled]="!replyForm.valid" type="submit">Envoyer</button>
             </div>
           </form>
       
           </div>
           <div *ngIf="!ticket && !newTicket" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
             <mat-icon>receipt</mat-icon>
-            <p>Select a ticket to read</p>
+            <p>Sélectionnez un ticket à lire</p>
           </div>
+
 <app-new-ticket [questions]="questions" [types]="types" [clients]="clients" [serversList]="serversList" [editableTicket]="editableTicket" *ngIf="newTicket"></app-new-ticket>
+
         </div>
       </mat-drawer-container>
     </mat-card>

@@ -76,7 +76,7 @@ export class RolesComponent implements OnInit {
 
   const dialogRef = this.dialog.open(ConfirmationComponent, {
             width: '350px',
-            data: 'Do you confirm the deletion of this data?'
+            data: 'Voulez vous vraiment supprimer?'
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventInput} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -23,7 +23,6 @@ export class AgendaComponent implements OnInit {
     constructor(private dialog: MatDialog, private service: AgendaService, private alert: SnackbarService) {
     }
 
-    @ViewChild('popoverElementRef', {read: ViewContainerRef}) popoverElementRef: ViewContainerRef;
 
     calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin]; // important!
     public header = {

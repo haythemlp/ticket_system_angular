@@ -1,4 +1,4 @@
-<h1 mat-dialog-title><span *ngIf="!user.id">Add</span><span *ngIf="user.id">Edit</span> user</h1>
+<h1 mat-dialog-title><span *ngIf="!user.id">Ajouter</span><span *ngIf="user.id">Modifier</span> utilisateur</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
         <mat-tab-group class="vertical-tabs">
@@ -9,13 +9,12 @@
                             <mat-form-field class="w-100 mr-2">
                                 <mat-placeholder>
                                     <mat-icon>person</mat-icon>
-                                    Username
+                                    Login
                                 </mat-placeholder>
                                 <input matInput formControlName="username" required>
-                                <mat-error *ngIf="form.controls.username.errors?.required">Username is required
+                                <mat-error *ngIf="form.controls.username.errors?.required">Login est obligatoire
                                 </mat-error>
-                                <mat-error *ngIf="form.controls.username.hasError('minlength')">Username isn't long
-                                    enough, minimum of 5 characters
+                                <mat-error *ngIf="form.controls.username.hasError('minlength')">Login n'est pas assez long ,il doit etre de 5 caractères minimum
                                 </mat-error>
                             </mat-form-field>
                         </mat-grid-tile>
@@ -23,14 +22,13 @@
                             <mat-form-field class="w-100 mr-2">
                                 <mat-placeholder>
                                     <mat-icon>vpn_key</mat-icon>
-                                    Password
+                                    Mot de passe 
                                 </mat-placeholder>
                                 <input matInput formControlName="password" [type]="passwordHide ? 'password' : 'text'">
                                 <mat-icon matSuffix
                                           (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
 
-                                <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long
-                                    enough, minimum of 6 characters
+                                <mat-error *ngIf="form.controls.password.hasError('minlength')">Mot de passe n'est pas assez long ,il doit etre de 6 caractères minimum
                                 </mat-error>
                             </mat-form-field>
                         </mat-grid-tile>
@@ -38,15 +36,15 @@
 
                             <mat-form-field class="w-100 mr-2">
                                 <input matInput type="email" placeholder="Email" formControlName="email">
-                                <mat-error *ngIf="form.controls.email.errors?.required">email is required</mat-error>
-                                <mat-error *ngIf="form.controls.email.hasError('email')">data should be email
+                                <mat-error *ngIf="form.controls.email.errors?.required">Email est obligatoire</mat-error>
+                                <mat-error *ngIf="form.controls.email.hasError('email')">Veuillez respecter le format Email
                                 </mat-error>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile>
                        
                                 <mat-form-field class="w-100 mr-2">
-                                    <mat-select placeholder="Choose role" formControlName="role_id" name="role">
+                                    <mat-select placeholder="Choisir un role" formControlName="role_id" name="role">
                                         <mat-option *ngFor="let role of roles" [value]="role.id">
                                             <div fxLayout="row" fxLayoutAlign="start center">
 
@@ -109,7 +107,7 @@
 
                         <mat-grid-tile>
                             <mat-form-field class="w-100 mr-2">
-                                <input matInput placeholder="Tel" formControlName="tel">
+                                <input matInput placeholder="Telephone" formControlName="tel">
                             </mat-form-field>
                         </mat-grid-tile>
 
@@ -146,6 +144,6 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
-            *ngIf="!user.id">Save</span><span *ngIf="user.id">Update</span></button>
-    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+            *ngIf="!user.id">Enregistrer</span><span *ngIf="user.id">Modifier</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Retour</button>
 </div>

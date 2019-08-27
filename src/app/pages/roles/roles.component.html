@@ -1,7 +1,7 @@
 <app-content-header
-        [icon]="'check_box_outline_blank'"
-        [title]="'Page title'"
-        [desc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin ante lectus, id pretium mi dignissim non.'"
+        [icon]="'work'"
+        [title]="'Roles'"
+        [desc]="'Afficher des informations sur les roles, rechercher, ajouter, modifier ou supprimer un role.'"
         [hideBreadcrumb]="false"
         [hasBgImage]="true"
         [class]="'pb-4'"></app-content-header>
@@ -16,7 +16,7 @@
     </div>
     <form class="search" [class.show]="showSearch">
         <mat-form-field class="px-3 py-1">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
         </mat-form-field>
     </form>
     <div fxLayout="row">
@@ -29,11 +29,11 @@
 
         <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef> id</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Numéro</mat-header-cell>
                 <mat-cell *matCellDef="let role" > {{role.id}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> nom de role</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Nom</mat-header-cell>
                 <mat-cell *matCellDef="let role"> {{role.name}} </mat-cell>
             </ng-container>
 
