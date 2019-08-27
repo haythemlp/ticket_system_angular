@@ -1,7 +1,7 @@
 <app-content-header 
-    [icon]="'check_box_outline_blank'" 
-    [title]="'Page title'" 
-    [desc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin ante lectus, id pretium mi dignissim non.'"
+    [icon]="'account_box'" 
+    [title]="'Clients'" 
+    [desc]="'Afficher des informations sur les clients, rechercher, ajouter, modifier ou supprimer un client..'"
     [hideBreadcrumb]="false"
     [hasBgImage]="true" 
     [class]="'pb-4'"></app-content-header>
@@ -16,7 +16,7 @@
     </div>
     <form class="search" [class.show]="showSearch">
         <mat-form-field class="px-3 py-1">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
         </mat-form-field>
     </form>
     <div fxLayout="row">
@@ -29,7 +29,7 @@
 
         <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> nom</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Nom</mat-header-cell>
                 <mat-cell *matCellDef="let client" [routerLink]="client.id"> {{client.name}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="num_contrat">
@@ -41,7 +41,7 @@
                 <mat-cell *matCellDef="let client"> {{client.address}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="email">
-                <mat-header-cell *matHeaderCellDef> email</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
                 <mat-cell *matCellDef="let client"> {{client.email}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">

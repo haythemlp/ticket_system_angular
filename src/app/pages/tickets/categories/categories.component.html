@@ -1,7 +1,7 @@
 <app-content-header
-        [icon]="'check_box_outline_blank'"
-        [title]="'Page title'"
-        [desc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin ante lectus, id pretium mi dignissim non.'"
+        [icon]="'category'"
+        [title]="'Catégories Tickets'"
+        [desc]="''"
         [hideBreadcrumb]="false"
         [hasBgImage]="true"
         [class]="'pb-4'"></app-content-header>
@@ -19,7 +19,7 @@
  
  <form class="search"  [class.show]="showSearch">
         <mat-form-field class="px-3 py-1">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type to filter all columns">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Rechrcher">
         </mat-form-field>
     </form>
 
@@ -32,11 +32,11 @@
 
     <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> id</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Numero</mat-header-cell>
         <mat-cell *matCellDef="let category" > {{category.id}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> category</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> categorie</mat-header-cell>
         <mat-cell *matCellDef="let category"> {{category.text}} </mat-cell>
       </ng-container>
 

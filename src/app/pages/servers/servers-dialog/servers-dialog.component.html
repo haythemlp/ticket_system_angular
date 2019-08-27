@@ -1,4 +1,4 @@
-<h1 mat-dialog-title><span *ngIf="!server.id">Add</span><span *ngIf="server.id">Edit</span> Server</h1>
+<h1 mat-dialog-title><span *ngIf="!server.id">Enregistrer</span><span *ngIf="server.id">Modifier</span> Serveur</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
         <mat-tab-group class="vertical-tabs">
@@ -10,7 +10,7 @@
 
                     <mat-form-field class="w-100 mr-2">
                        
-<mat-select placeholder="Choose type" formControlName="client_id" name="client">
+<mat-select placeholder="Choisir un type" formControlName="client_id" name="client">
                                     <mat-option *ngFor="let client of clients" [value]="client.id">
                                         <div fxLayout="row" fxLayoutAlign="start center">
                                             <span class="mx-3">{{client.name}}</span>
@@ -24,9 +24,9 @@
                         </mat-grid-tile>
                        <mat-grid-tile >
                     <mat-form-field class="w-100 mr-2">
-                        <input matInput formControlName="name" placeholder="Name" required>
-                        <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
-                        <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5
+                        <input matInput formControlName="name" placeholder="Nom" required>
+                        <mat-error *ngIf="form.controls.name.errors?.required">Nom est obligatoire</mat-error>
+                        <mat-error *ngIf="form.controls.name.hasError('minlength')">Nom n'est pas assez long ,il doit etre de 5 caractères minimum
                             characters
                         </mat-error>
                     </mat-form-field>
@@ -118,6 +118,6 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span
-            *ngIf="!server.id">Save</span><span *ngIf="server.id">Update</span></button>
-    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+            *ngIf="!server.id">Enregistrer</span><span *ngIf="server.id">Modifier</span></button>
+    <button mat-raised-button color="warn" (click)="close()">Retour</button>
 </div>

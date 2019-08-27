@@ -1,17 +1,17 @@
 import {Menu} from './menu.model';
 
 export const verticalMenuItems = [
-    new Menu(1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
-    new Menu(2, 'Users', '/users', null, 'supervisor_account', null, false, 0),
+    new Menu(1, 'Accueil', '/', null, 'dashboard', null, false, 0),
+    new Menu(2, 'Utilisateurs', '/users', null, 'supervisor_account', null, false, 0),
     new Menu(37, 'Roles', '/roles', null, 'work', null, false, 0),
     new Menu(19, 'Clients', '/clients', null, 'account_box', null, false, 0),
-    new Menu(3, 'Servers', '/servers', null, 'domain', null, false, 0),
+    new Menu(3, 'Serveurs', '/servers', null, 'domain', null, false, 0),
     new Menu(148, 'Agenda', '/agenda', null, 'event_note', null, false, 0),
     new Menu(38, 'Tickets', null, null, 'receipt', null, true, 0),
     new Menu(145, 'List', '/tickets/list', null, 'view_list', null, false, 38),
     new Menu(146, 'Questions', '/tickets/questions', null, 'question_answer', null, false, 38),
     new Menu(147, 'Categories', '/tickets/categories', null, 'category', null, false, 38),
-    new Menu(18, 'UI Features', null, null, 'computer', null, true, 0),
+   /* new Menu(18, 'UI Features', null, null, 'computer', null, true, 0),
     new Menu(4, 'Buttons', '/ui/buttons', null, 'keyboard', null, false, 18),
     new Menu(5, 'Cards', '/ui/cards', null, 'card_membership', null, false, 18),
     new Menu(6, 'Lists', '/ui/lists', null, 'list', null, false, 18),
@@ -67,7 +67,7 @@ export const verticalMenuItems = [
     new Menu(142, 'Level 3', null, null, 'folder_open', null, true, 141),
     new Menu(143, 'Level 4', null, null, 'folder_open', null, true, 142),
     new Menu(144, 'Level 5', null, 'http://themeseason.com', 'link', null, false, 143),
-    new Menu(200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0)
+    new Menu(200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0)*/
 ];
 
 export const horizontalMenuItems = [

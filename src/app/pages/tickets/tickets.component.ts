@@ -99,10 +99,10 @@ public getTickets(){
           this.types=data.types;
           for (var i = 0; i < this.questions.length; ++i) {
  this.addItems();
- this.spiner= true;
+
 }
 
-
+ this.spiner= true;
 
  this.getAllTickets();  
 
