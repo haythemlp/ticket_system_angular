@@ -6,9 +6,9 @@
       <mat-form-field class="w-100 mr-2">
 
 
-        <input matInput placeholder="Nom" formControlName="text" required>
-        <mat-error *ngIf="form.controls.text.errors?.required">Nom est obligatoire</mat-error>
-        <mat-error *ngIf="form.controls.text.hasError('minlength')">Nom n'est pas assez long ,il doit etre de 5 caractères minimum
+        <textarea matInput placeholder="Question" formControlName="text" required></textarea>
+        <mat-error *ngIf="form.controls.text.errors?.required">Question est obligatoire</mat-error>
+        <mat-error *ngIf="form.controls.text.hasError('minlength')">Question n'est pas assez long ,il doit etre de 20 caractères minimum
         </mat-error>
       </mat-form-field>
 

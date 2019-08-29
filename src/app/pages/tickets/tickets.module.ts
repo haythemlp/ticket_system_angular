@@ -13,6 +13,7 @@ import { DialogQuestionComponent } from './questions/dialog-question/dialog-ques
 import { DialogCategoryComponent } from './categories/dialog-category/dialog-category.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { ReadTicketComponent } from './read-ticket/read-ticket.component';
+import { TicketReplyComponent } from './ticket-reply/ticket-reply.component';
 
 
 export const routes = [
@@ -32,8 +33,8 @@ export const routes = [
         SharedModule,
         PipesModule
     ],
-    declarations: [TicketsComponent, QuestionsComponent, CategoriesComponent, DialogQuestionComponent, DialogCategoryComponent, NewTicketComponent, ReadTicketComponent],
-     entryComponents:[DialogQuestionComponent,DialogCategoryComponent]
+    declarations: [TicketsComponent, QuestionsComponent, CategoriesComponent, DialogQuestionComponent, DialogCategoryComponent, NewTicketComponent, ReadTicketComponent, TicketReplyComponent],
+     entryComponents:[DialogQuestionComponent,DialogCategoryComponent,TicketReplyComponent]
 })
 export class TicketsModule {
 }

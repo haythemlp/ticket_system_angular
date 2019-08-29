@@ -22,17 +22,13 @@
                 <mat-header-cell *matHeaderCellDef> Client</mat-header-cell>
                 <mat-cell *matCellDef="let server"> {{server.client.name}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="ip">
-                <mat-header-cell *matHeaderCellDef> ip</mat-header-cell>
-                <mat-cell *matCellDef="let server"> {{server.ip}} </mat-cell>
-            </ng-container>
             <ng-container matColumnDef="status">
                 <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
                 <mat-cell *matCellDef="let server">
                     <span *ngIf="server.status"> <mat-chip color="accent" selected="true"
-                                                           class="px-3 py-1">Active</mat-chip>   </span>
+                                                           class="px-3 py-1">Activé</mat-chip>   </span>
                     <span *ngIf="!server.status"> <mat-chip color="warn" selected="true"
-                                                            class="px-3 py-1"> unactive </mat-chip> </span>
+                                                            class="px-3 py-1"> Blocké </mat-chip> </span>
 
                 </mat-cell>
             </ng-container>

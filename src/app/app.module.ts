@@ -1,10 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule,LOCALE_ID } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {CustomOverlayContainer} from './theme/utils/custom-overlay-container';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -40,7 +42,7 @@ import {UserMenuComponent} from './theme/components/user-menu/user-menu.componen
 import {FavoritesComponent} from './theme/components/favorites/favorites.component';
 import {HttpClientModule} from '@angular/common/http';
 
-
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
     imports: [
@@ -77,7 +79,8 @@ import {HttpClientModule} from '@angular/common/http';
         AppSettings,
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG},
         {provide: OverlayContainer, useClass: CustomOverlayContainer},
-        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+        { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+        { provide: LOCALE_ID, useValue: "fr-FR" }
     ],
     bootstrap: [
         AppComponent

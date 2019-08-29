@@ -39,6 +39,7 @@
                         
                         <img *ngIf="!user.avatar" src="assets/img/users/default-user.jpg" class="transition mb-2" >
                         <img  *ngIf="user.avatar" src="{{mediaUrl+user.avatar}}" class="transition mb-2" >
+                        <mat-icon *ngIf="!user.is_active" class="warn-color block-icon">block</mat-icon>
                         <div fxLayout="row" fxLayoutAlign="center center" class="social-icons">
                             <a [href]="'https://www.facebook.com/'" target="_blank">
                                 <svg class="mat-icon mat-icon-sm mx-1" viewBox="0 0 24 24">
@@ -87,7 +88,7 @@
                     <div class="info-list mx-2" >
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">card_membership</mat-icon>
-                            <span>Product designer</span>
+                            <span>{{user.role.name}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">mail_outline</mat-icon>
@@ -95,11 +96,11 @@
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">call</mat-icon>
-                            <span>(202) 756-9756</span>
+                            <span>{{user.mobile}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="secondary-text-color">location_on</mat-icon>
-                            <span>tunisia</span>
+                            <mat-icon class="secondary-text-color">event_available</mat-icon>
+                            <span>{{user.created_at | date:"dd MMMM, yyyy"}}</span>
                         </p>
                     </div>                    
                 </div>
@@ -112,6 +113,8 @@
                 <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center" class="bg-primary" >
                     <div class="user-img">
                         <img src="assets/img/users/default-user.jpg" class="transition mb-2" >  
+                                                <mat-icon *ngIf="!user.is_active" class="warn-color block-icon">block</mat-icon>
+
                         <div fxLayout="row" fxLayoutAlign="center center" class="social-icons">
                             <a [href]="'https://www.facebook.com/'" target="_blank">
                                 <svg class="mat-icon mat-icon-sm mx-1" viewBox="0 0 24 24">
@@ -164,12 +167,9 @@
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">card_membership</mat-icon>
-                            <span>Product designer</span>
+                            <span>{{user.role.name}}</span>
                         </p>
-                        <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="secondary-text-color">attach_money</mat-icon>
-                            <span>70000 usd</span>
-                        </p>                                               
+                                                                   
                     </div>
                     <div fxFlex="30" fxFlex.xs="100" fxLayout="column" class="info-list px-2" >
                         <p fxLayout="row" fxLayoutAlign="start center">
@@ -178,26 +178,20 @@
                         </p> 
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">call</mat-icon>
-                            <span>55185672</span>
+                            <span>{{user.mobile}}</span>
                         </p>
-                        <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="secondary-text-color">location_on</mat-icon>
-                            <span>tunisie</span>
-                        </p>                        
+                                           
                     </div>
                     <div fxFlex="40" fxFlex.xs="100" fxLayout="column" class="info-list px-2" >
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="secondary-text-color">event_available</mat-icon>
-                            <span>Registration {{user.created_at | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                            <span>Registration {{user.created_at | date:"dd MMMM, yyyy"}}</span>
                         </p>
-                        <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="secondary-text-color">date_range</mat-icon>
-                            <span>Joined {{user.created_at | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
-                        </p> 
                         <p fxLayout="row" fxLayoutAlign="start center">
                       
                             <mat-icon  class="secondary-text-color">person</mat-icon>
-                            <span>{{  'Active' }}</span>
+                            <span *ngIf='user.is_active'>Activé </span>
+                             <span *ngIf='!user.is_active'>Bloqué</span>
                         </p>                       
                     </div>
                 </div>

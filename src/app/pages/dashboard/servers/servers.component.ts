@@ -10,7 +10,7 @@ import {Server} from '../../servers/server';
 export class ServersComponent implements OnInit, AfterViewInit, OnChanges {
 
     @Input() servers: Server[];
-    public displayedColumns = ['name', 'url', 'company', 'ip', 'status'];
+    public displayedColumns = ['name', 'url', 'company', 'status'];
     public dataSource: any;
 
     constructor() {

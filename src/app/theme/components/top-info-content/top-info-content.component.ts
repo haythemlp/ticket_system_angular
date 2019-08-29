@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../utils/app-validators';
+import {environment} from "../../../../environments/environment.prod";
+import {User} from '../../../pages/users/user.model';
 
 @Component({
   selector: 'app-top-info-content',
@@ -8,6 +10,11 @@ import { emailValidator } from '../../utils/app-validators';
   styleUrls: ['./top-info-content.component.scss']
 })
 export class TopInfoContentComponent implements OnInit {
+
+    public mediaUrl: string = environment.mediaUrl;
+    public url: string = environment.url;
+     public user: User;
+
   @Input('showInfoContent') showInfoContent:boolean = false;
   @Output() onCloseInfoContent: EventEmitter<any> = new EventEmitter();
   contactForm: FormGroup;
@@ -23,6 +30,7 @@ export class TopInfoContentComponent implements OnInit {
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
+            this.user = JSON.parse(localStorage.getItem('user'));
     this.contactForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, emailValidator])],
       subject: ['', Validators.required],

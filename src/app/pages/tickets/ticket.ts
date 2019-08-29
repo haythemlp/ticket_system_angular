@@ -62,3 +62,20 @@ export class Category {
 
 
 }
+
+
+export class Reply {
+
+public id:number;
+public user_id: number;
+public ticket_id: number;
+public body:string;
+
+
+    constructor(id:number,ticket_id:number,body:string){
+
+        this.id=id;
+        this.ticket_id=ticket_id;
+        this.body=body;
+    }
+}

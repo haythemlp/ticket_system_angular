@@ -22,7 +22,7 @@ export class DialogQuestionComponent implements OnInit {
 
     this.form = this.fb.group({
       id: null,
-      text: [null, Validators.compose([Validators.required, Validators.minLength(5)])]
+      text: [null, Validators.compose([Validators.required, Validators.minLength(20)])]
     });
   }
 

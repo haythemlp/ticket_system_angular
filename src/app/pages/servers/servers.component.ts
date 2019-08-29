@@ -20,7 +20,7 @@ export class ServersComponent implements OnInit {
     public dataSource: any;
     public spiner = false;
 
-    public displayedColumns = ['name', 'url', 'company', 'ip', 'actions'];
+    public displayedColumns = ['name', 'url', 'company', 'ip', 'status', 'actions'];
 
 
     constructor(private serversService: ServersService, public dialog: MatDialog, private snackbar: SnackbarService) {

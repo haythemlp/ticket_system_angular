@@ -2,11 +2,13 @@
     <button mat-mini-fab color="warn" class="close-btn" (click)="closeInfoContent(showInfoContent)"><mat-icon>close</mat-icon></button>
     <div fxFlex="100" fxFlex.gt-sm="40" class="py-3 col">
         <div fxLayout="row" fxLayoutAlign="center center">
-            <img src="assets/img/users/user.jpg" class="mat-elevation-z2" alt="">
+           
+              <img *ngIf="!user.avatar" src="{{url}}assets/img/users/default-user.jpg" class="mat-elevation-z2" alt="user-image">
+        <img *ngIf="user.avatar" src="{{mediaUrl+user.avatar}}" class="mat-elevation-z2" alt="user-image">
             <div class="user-details px-4">
-                <h2>Emilio Verdines</h2>
-                <h3 class="secondary-text-color">Web developer</h3>
-                <p class="secondary-text-color mt-1">Member since May. 2016</p>
+                <h2>{{user.firstname}} {{user.lastname}}</h2>
+                <h3 class="secondary-text-color">{{user.role.name}}</h3>
+                <p class="secondary-text-color mt-1">Member since {{user.created_at | date: 'dd MMMM, yyyy' }}</p>
                 <div class="secondary-text-color">
                     <button mat-icon-button matTooltip="Facebook" class="mx-1">
                         <svg class="mat-icon" viewBox="0 0 24 24">

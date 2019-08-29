@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, HostListener,ElementRef ,ChangeDetectorRef} from '@angular/core';
 import { FormGroup, FormBuilder, Validators,FormArray,FormControl} from '@angular/forms';
 import { MatDialog, MatRadioChange} from '@angular/material';
-
-
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import {TicketsService} from './tickets.service';
-import {Ticket} from './ticket';
+import {Ticket,Reply} from './ticket';
 import {SnackbarService} from '../../services/snackbar.service';
 import {ConfirmationComponent} from '../../shared/confirmation/confirmation.component';
+import {TicketReplyComponent} from './ticket-reply/ticket-reply.component';
 
 
 
@@ -21,10 +20,9 @@ import {ConfirmationComponent} from '../../shared/confirmation/confirmation.comp
   providers: [ TicketsService ]
 })
 export class TicketsComponent implements OnInit {
-	public status:string ='all';
+  public status:string ='all';
   @ViewChild('sidenav') sidenav: any;
   @ViewChild('reply') replydiv ;
-  public user =JSON.parse(localStorage.getItem("user")) ;
   public settings: Settings;
   public answers:any;
   public sidenavOpen:boolean = true;
@@ -46,7 +44,7 @@ export class TicketsComponent implements OnInit {
    public replyForm:FormGroup;
 
 
-  constructor(public formBuilder: FormBuilder,private ticketsService:TicketsService,public appSettings:AppSettings,public dialog: MatDialog, 
+  constructor(private ticketsService:TicketsService,public appSettings:AppSettings,public dialog: MatDialog, 
               public snackBar: SnackbarService,private ref: ChangeDetectorRef ) { 
 
   }
@@ -55,12 +53,8 @@ export class TicketsComponent implements OnInit {
 
   ngOnInit() {
 
-  this.replyForm = this.formBuilder.group({
-      'ticket_id': [null, Validators.required],   
-      'body': [null, Validators.required]
-    });   
 
-  	 this.getTickets();  
+     this.getTickets();  
     if(window.innerWidth <= 992){
       this.sidenavOpen = false;
     }
@@ -94,16 +88,15 @@ public getTickets(){
 
 
         });
+ 
+   }
 
-}
-
-scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior:"smooth"});
+    scroll(el: HTMLElement) {el.scrollIntoView({behavior:"smooth"});
 
 
-}
+} 
 
-    public getAllTickets(){
+ public getAllTickets(){
     switch (this.status) {
       case 'all': 
         this.tickets = this.ticketsService.getAllTickets(this.ticketList);
@@ -121,12 +114,14 @@ scroll(el: HTMLElement) {
         this.tickets =  this.ticketsService.getUnsolvedTickets(this.ticketList);
         break;
     
-    }   
+      }   
 
-  }
+    }
+
+
 
   public viewDetail(id){
-  	this.replyTicket=false;
+    this.replyTicket=false;
     this.ticket = this.ticketsService.getTicket(this.tickets,id); 
     this.tickets.forEach(m => m.selected = false);
 
@@ -135,25 +130,25 @@ scroll(el: HTMLElement) {
     if(window.innerWidth <= 992){
       this.sidenav.close(); 
     }
-  }
+     }
 
 public delete(){
 
-	const dialogRef = this.dialog.open(ConfirmationComponent, {
+  const dialogRef = this.dialog.open(ConfirmationComponent, {
             width: '350px',
             data: 'Do you confirm the deletion of this data?'
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
 
-            	this.ticketsService.deleteTicket(this.ticket.id).subscribe(()=>{
+              this.ticketsService.deleteTicket(this.ticket.id).subscribe(()=>{
 
-            		this.getTickets();
+                this.getTickets();
 
 
 this.snackBar.open('supprimé avec succès', 'success');
 
-            	})
+              })
         
                     
                
@@ -211,40 +206,26 @@ this.snackBar.open('supprimé avec succès', 'success');
 
 // Reply 
 
-reply(){
+replyDialog(ticktReply :Reply){
 
-	
-	 this.replyForm.controls['ticket_id'].setValue(this.ticket.id);
-
-	this.replyTicket=true;
-  this.ref.detectChanges();
-   
-  console.log(this.replydiv);
-
- console.log(document.querySelector('#reply')) 
-
-  
-  //this.replydiv.nativeElement.scrollIntoView();
-}
-
-
-
-    public replySubmit(reply){
-   
-    this.replyTicket=false;
-   
-   if (this.replyForm.valid) {
-     
- (reply.id) ? this.updateReply(reply) : this.addReply(reply);
-
-   
-    }
-
-     this.replyForm.reset();
+  if (!ticktReply) {
+    ticktReply= new Reply(null,this.ticket.id,null);
   }
 
 
+ const dialogRef = this.dialog.open(TicketReplyComponent, {
+           width:"700px",
+            data: ticktReply
+        });
+        dialogRef.afterClosed().subscribe(reply => {
+            if (reply) {
 
+            (reply.id) ? this.updateReply(reply) : this.addReply(reply);
+
+           
+            }
+        });
+}
 
 
    public addReply(reply) {
@@ -253,20 +234,32 @@ reply(){
             this.replyTicket=false;
         });
     }
-
-
   public updateReply(reply) {
-        this.ticketsService.updateTicket(reply).subscribe(() => {
+        this.ticketsService.updateReply(reply).subscribe(() => {
             this.getTickets();  
 
         });
     }
-
      public deleteReply(reply) {
-        this.ticketsService.deleteReply(reply.id).subscribe(() => {
-            this.getTickets();  
 
+
+  const dialogRef = this.dialog.open(ConfirmationComponent, {
+            width: '350px',
+            data: 'Do you confirm the deletion of this data?'
         });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+
+              
+
+              this.ticketsService.deleteReply(reply.id).subscribe(() =>  this.getTickets());
+                    
+               
+            }
+        });
+
+
+        
     }
 
 

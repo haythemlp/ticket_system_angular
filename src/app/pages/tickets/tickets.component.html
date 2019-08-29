@@ -1,18 +1,14 @@
-<app-content-header
-        [title]="'List'"
-        [hideBreadcrumb]="false"
-        [hasBgImage]="true"
-        [class]="'pb-5'"></app-content-header>
+<app-content-header [title]="'List'" [hideBreadcrumb]="false" [hasBgImage]="true" [class]="'pb-5'"></app-content-header>
 
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center" class="px-2 mailbox-toolbar">
-  <div fxLayout="row" *ngIf="spiner">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>list</mat-icon>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="filterMenu" #filterMenuTrigger="matMenuTrigger">
-      <mat-icon>filter_list</mat-icon>
-    </button>
-    <mat-menu #filterMenu="matMenu">
+    <div fxLayout="row" *ngIf="spiner">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>list</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="filterMenu" #filterMenuTrigger="matMenuTrigger">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+        <mat-menu #filterMenu="matMenu">
             <span (mouseleave)="filterMenuTrigger.closeMenu()">
                 <button mat-menu-item (click)="status = 'all';getAllTickets();">Tous</button>
                 <button mat-menu-item (click)="status = 'new';getAllTickets();">Nouveaux</button>
@@ -20,169 +16,87 @@
                 <button mat-menu-item (click)="status = 'solved';getAllTickets();">Resolu</button>
                 <button mat-menu-item (click)="status = 'unsolved';getAllTickets();">Non resolu</button>
             </span>
-    </mat-menu>
-    <button mat-icon-button (click)="showSearch = !showSearch">
-      <mat-icon>search</mat-icon>
-    </button>
-  </div>
-  <form class="mail-search" [class.show]="showSearch">
-    <mat-form-field class="mail-search-input">
-      <input matInput placeholder="Chercher ticket..." [(ngModel)]="searchText" name="search">
-    </mat-form-field>
-  </form>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <button *ngIf="ticket" mat-icon-button matTooltip="Repondre" (click)="reply()" matTooltipPosition="above">
-      <mat-icon>reply</mat-icon>
-    </button>
-    <button *ngIf="newTicket" mat-icon-button (click)="newTicket = false;" matTooltip="Back" matTooltipPosition="above">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-   
+        </mat-menu>
+        <button mat-icon-button (click)="showSearch = !showSearch">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <form class="mail-search" [class.show]="showSearch">
+        <mat-form-field class="mail-search-input">
+            <input matInput placeholder="Chercher ticket..." [(ngModel)]="searchText" name="search">
+        </mat-form-field>
+    </form>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button *ngIf="ticket" mat-icon-button matTooltip="Repondre" (click)="replyDialog(null)" matTooltipPosition="above">
+            <mat-icon>reply</mat-icon>
+        </button>
+        <button *ngIf="newTicket" mat-icon-button (click)="newTicket = false;" matTooltip="Back" matTooltipPosition="above">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
 
-    <button *ngIf="ticket" mat-icon-button (click)="delete()" matTooltip="Supprimer" matTooltipPosition="above">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="moreMenu" #moreMenuTrigger="matMenuTrigger" [style.display]="(ticket) ? 'block' : 'none'">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #moreMenu="matMenu" xPosition="before">
+        <button *ngIf="ticket" mat-icon-button (click)="delete()" matTooltip="Supprimer" matTooltipPosition="above">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="moreMenu" #moreMenuTrigger="matMenuTrigger" [style.display]="(ticket) ? 'block' : 'none'">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #moreMenu="matMenu" xPosition="before">
             <span (mouseleave)="moreMenuTrigger.closeMenu()">
                 <button *ngIf="ticket && ticket.status !='new' " mat-menu-item (click)="changeType('new')">Maquer comme nouveau</button>
                 <button *ngIf="ticket && ticket.status !='read' " mat-menu-item (click)="changeType('read')">Marquer comme lu</button>
                  <button *ngIf="ticket && ticket.status !='solved' " mat-menu-item (click)="changeType('solved')">Marquer comme resolu</button>
                  <button *ngIf="ticket && ticket.status !='unsolved' " mat-menu-item (click)="changeType('unsolved')">Marquer comme non resolu</button>
             </span>
-    </mat-menu>
-    <button mat-icon-button (click)="compose()" fxHide="false" fxHide.gt-xs>
-      <mat-icon>fiber_new</mat-icon>
-    </button>
-    <button mat-raised-button color="accent" (click)="compose(null)" class="compose" fxShow="false" fxShow.gt-xs>Compose</button>
-  </div>
+        </mat-menu>
+        <button mat-icon-button (click)="compose()" fxHide="false" fxHide.gt-xs>
+            <mat-icon>fiber_new</mat-icon>
+        </button>
+        <button mat-raised-button color="accent" (click)="compose(null)" class="compose" fxShow="false" fxShow.gt-xs>Compose</button>
+    </div>
 </mat-toolbar>
 
 <div fxLayout="row wrap">
-  <div fxFlex="100" *ngIf="spiner">
-    <mat-card class="p-0 mailbox">
-      <mat-drawer-container class="mailbox-container">
-        <mat-drawer #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="mailbox-sidenav mat-elevation-z1" autoFocus="false">
-          <mat-nav-list class="p-0 mailbox-sidenav-list" perfectScrollbar>
-            <div *ngFor="let ticket of tickets " (click)="viewDetail(ticket.id)">
-              <mat-list-item>
-              
-                <img  matListAvatar src="assets/img/users/default-user.jpg">
+    <div fxFlex="100" *ngIf="spiner">
+        <mat-card class="p-0 mailbox">
+            <mat-drawer-container class="mailbox-container">
+                <mat-drawer #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="mailbox-sidenav mat-elevation-z1" autoFocus="false">
+                    <mat-nav-list class="p-0 mailbox-sidenav-list" perfectScrollbar>
+                        <div *ngFor="let ticket of tickets " (click)="viewDetail(ticket.id)">
+                            <mat-list-item>
 
-                <div matLine fxLayout="row" fxLayoutAlign="space-between space-between">
-                  <h4 class="text-truncate sender">{{ticket.client}} <mat-chip color="primary" class="px-2 ml-2">{{ticket.status}}</mat-chip></h4> 
-                  <small>{{ticket.created_at}}</small>
+                                <img matListAvatar src="assets/img/users/default-user.jpg">
 
-                </div>
+                                <div matLine fxLayout="row" fxLayoutAlign="space-between space-between">
+                                    <h4 class="text-truncate sender">{{ticket.client}} <mat-chip color="primary" class="px-2 ml-2">{{ticket.status}}</mat-chip></h4>
+                                    <small>{{ticket.created_at}}</small>
 
-                <p matLine class="text-truncate subject">{{ticket.sujet}}</p>
+                                </div>
 
-              </mat-list-item>
-              <mat-divider></mat-divider>
-            </div>
-          </mat-nav-list>
-        </mat-drawer>
+                                <p matLine class="text-truncate subject">{{ticket.sujet}}</p>
 
-        <div class="mailbox-content" perfectScrollbar>
-          <div *ngIf="ticket">
-            <mat-list class="p-0">
-              <mat-list-item class="h-100 py-3">
-                <div matLine  fxLayout="row" fxLayoutAlign="space-between center">
-                  <h2 class="subject">{{ticket.sujet}}</h2>
-                  <mat-icon (click)="compose(ticket)" class="secondary-text-color">edit</mat-icon>
-                </div>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item class="h-100 py-3">
-                
-                <img matListAvatar src="assets/img/users/default-user.jpg">
-                <h6 matLine fxLayout="row" fxLayoutAlign="space-between center">
-                                    <span>
-                                        <strong class="text-truncate">{{ticket.client}}</strong>
-                                      
-                                    </span>
-                  <span>{{ticket.created_at}}</span>
-                </h6>
-                <span matLine>{{ticket.type}} <mat-chip color="primary" selected="true" class="px-2 ml-2">{{ticket.status}}</mat-chip></span>
-              </mat-list-item>
-               <ng-container *ngIf="ticket.questions.length > 0">
-               <mat-divider ></mat-divider>
-                <mat-list-item >
-                   <section matLine *ngFor="let q of ticket.questions"> 
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
+                    </mat-nav-list>
+                </mat-drawer>
 
-                    {{q.name}} <mat-chip color="warn" selected="true" class="px-2 ml-2">{{q.value}}</mat-chip>
+                <div class="mailbox-content" perfectScrollbar>
 
-                   </section>
-
-                </mat-list-item>
-              </ng-container>
-              <mat-divider></mat-divider>
-            </mat-list>
-
-
-
-            <div  class="mail-body" [innerHTML]="ticket.body"></div>
-
-
-            <mat-list class="p-5">
-              <mat-divider></mat-divider>
-
-              <ng-container *ngFor="let reply of ticket.replies">     
-             
-                    <mat-list-item   class="py-2">
-                   
-                        <img matListAvatar [src]="'/assets/img/users/default-user.jpg'" alt="image">
-                        <h3 matLine style="font-weight: bold;">  {{reply.user.lastname}} {{reply.user.firstname}} </h3>
-
-    <p  matLine   [innerHTML]="reply.body"></p> 
-
-    <ng-container *ngIf="reply.user_id==user.id">
-       <button mat-icon-button [matMenuTriggerFor]="moreMenuReply" #moreMenuReplyTrigger="matMenuTrigger" >
-      <mat-icon>more_vert</mat-icon>
-    </button>
-   
-    <mat-menu #moreMenuReply="matMenu" xPosition="before">
-            <span (mouseleave)="moreMenuReplyTrigger.closeMenu()">
-                <button mat-menu-item (click)="reply.edit=false">Modifier</button>
-
-                <button mat-menu-item (click)="deleteReply(reply)">Supprimer</button>
-
-            </span>
-    </mat-menu>
-     
-
-    </ng-container>
-
-
-                    </mat-list-item> 
+                    <ng-container *ngIf="ticket">
+                        <app-read-ticket [ticket]="ticket"></app-read-ticket>
                     </ng-container>
-                </mat-list>
+                    <div *ngIf="!ticket && !newTicket" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
+                        <mat-icon>receipt</mat-icon>
+                        <p>Sélectionnez un ticket à lire</p>
+                    </div>
 
+                    <app-new-ticket [questions]="questions" [types]="types" [clients]="clients" [serversList]="serversList" [editableTicket]="editableTicket" *ngIf="newTicket"></app-new-ticket>
 
-       <form id="replyForm" #reply *ngIf="replyTicket" [formGroup]="replyForm" (ngSubmit)="replySubmit(replyForm.value)" class="mail-body">
-            <quill-editor formControlName="body"></quill-editor>
-          
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-              <button mat-raised-button (click)="replyTicket = false;replyForm.reset()" type="button">Retour</button>
-              <button mat-raised-button color="primary" [disabled]="!replyForm.valid" type="submit">Envoyer</button>
-            </div>
-          </form>
-      
-          </div>
-          <div *ngIf="!ticket && !newTicket" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
-            <mat-icon>receipt</mat-icon>
-            <p>Sélectionnez un ticket à lire</p>
-          </div>
-
-<app-new-ticket [questions]="questions" [types]="types" [clients]="clients" [serversList]="serversList" [editableTicket]="editableTicket" *ngIf="newTicket"></app-new-ticket>
-
-        </div>
-      </mat-drawer-container>
-    </mat-card>
-  </div>
-   <div *ngIf="!spiner" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
-    <mat-spinner color="accent"></mat-spinner>
-  </div>
+                </div>
+            </mat-drawer-container>
+        </mat-card>
+    </div>
+    <div *ngIf="!spiner" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+        <mat-spinner color="accent"></mat-spinner>
+    </div>
 </div>

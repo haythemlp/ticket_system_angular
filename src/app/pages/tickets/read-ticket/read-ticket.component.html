@@ -1,3 +1,76 @@
-<p>
-  read-ticket works!
-</p>
+<mat-list class="p-0">
+    <mat-list-item class="h-100 py-3">
+        <div matLine fxLayout="row" fxLayoutAlign="space-between center">
+            <h2 class="subject">{{ticket.sujet}}</h2>
+            <mat-icon (click)="compose(ticket)" class="secondary-text-color">edit</mat-icon>
+        </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="h-100 py-3">
+
+        <img matListAvatar src="assets/img/users/default-user.jpg">
+        <h6 matLine fxLayout="row" fxLayoutAlign="space-between center">
+                                    <span>
+                                        <strong class="text-truncate">{{ticket.client}}</strong>
+
+                                    </span>
+                  <span>{{ticket.created_at}}</span>
+                </h6>
+        <span matLine>{{ticket.type}} <mat-chip color="primary" selected="true" class="px-2 ml-2">{{ticket.status}}</mat-chip></span>
+    </mat-list-item>
+    <ng-container *ngIf="ticket.questions.length > 0">
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <section matLine *ngFor="let q of ticket.questions">
+
+                {{q.name}}
+                <mat-chip color="warn" selected="true" class="px-2 ml-2">{{q.value}}</mat-chip>
+
+            </section>
+
+        </mat-list-item>
+    </ng-container>
+    <mat-divider></mat-divider>
+</mat-list>
+
+<div class="mail-body" [innerHTML]="ticket.body"></div>
+
+<mat-list class="p-5">
+    <mat-divider></mat-divider>
+
+    <ng-container *ngFor="let reply of ticket.replies">
+
+        <mat-list-item class="py-2">
+
+            <img matListAvatar [src]="'/assets/img/users/default-user.jpg'" alt="image">
+            <h3 matLine style="font-weight: bold;">  {{reply.user.lastname}} {{reply.user.firstname}} </h3>
+
+            <p matLine [innerHTML]="reply.body"></p>
+
+            <ng-container *ngIf="reply.user_id==user.id">
+                <button mat-icon-button [matMenuTriggerFor]="moreMenuReply" #moreMenuReplyTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #moreMenuReply="matMenu" xPosition="before">
+                    <span (mouseleave)="moreMenuReplyTrigger.closeMenu()">
+                <button mat-menu-item (click)="edit(reply)">Modifier</button>
+                <button mat-menu-item (click)="delete(reply)">Supprimer</button>
+
+            </span>
+                </mat-menu>
+
+            </ng-container>
+
+        </mat-list-item>
+    </ng-container>
+</mat-list>
+
+<form id="replyForm" #reply *ngIf="replyTicket" [formGroup]="replyForm" (ngSubmit)="replySubmit(replyForm.value)" class="mail-body">
+    <quill-editor formControlName="body"></quill-editor>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-raised-button (click)="replyTicket = false;replyForm.reset()" type="button">Retour</button>
+        <button mat-raised-button color="primary" [disabled]="!replyForm.valid" type="submit">Envoyer</button>
+    </div>
+</form>

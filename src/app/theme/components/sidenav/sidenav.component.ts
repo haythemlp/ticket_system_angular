@@ -18,6 +18,7 @@ export class SidenavComponent implements OnInit {
         wheelPropagation: true
     };
     public mediaUrl: string = environment.mediaUrl;
+    public url: string = environment.url;
     public menuItems: Array<any>;
     public settings: Settings;
     public user: User;
